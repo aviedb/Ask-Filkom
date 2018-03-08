@@ -97,9 +97,10 @@ export default class Styling extends Component {
           }
 
           .header {
+            position: fixed;
             display: flex;
             align-items: center;
-            height: 10vh;
+            height: 70px;
             width: 100vw;
             background: -moz-linear-gradient(125deg, rgba(39,107,130,1) 0%, rgba(49,84,129,1) 100%); /* ff3.6+ */
             background: -webkit-gradient(linear, left top, right bottom, color-stop(0%, rgba(49,84,129,1)), color-stop(100%, rgba(39,107,130,1))); /* safari4+,chrome */
