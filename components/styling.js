@@ -124,8 +124,8 @@ export default class Styling extends Component {
           .button-login {
             border-radius: 5px;
             margin: 20px 0;
-            background: rgb(209, 220, 226);
-            color: black;
+            background: transparent;
+            color: rgb(229, 234, 237);
             padding: 10px;
           }
 

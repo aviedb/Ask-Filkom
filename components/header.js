@@ -23,7 +23,7 @@ export default class Header extends Component {
           </div>
           <div style={{ padding: "20px" }}>
             <div className="form-field">
-              <button className="button-login">Login</button>
+              <button className="button-login">Log In</button>
             </div>
           </div>
         </div>
