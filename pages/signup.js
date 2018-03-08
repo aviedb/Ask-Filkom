@@ -26,10 +26,6 @@ export default class Signup extends Component {
                 <input type="password" required/>
               </div>
               <div className="form-field">
-                <label>Confirm password</label>
-                <input type="password" required/>
-              </div>
-              <div className="form-field">
                 <button>Signup</button>
               </div>
             </form>

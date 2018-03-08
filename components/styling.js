@@ -15,6 +15,10 @@ export default class Styling extends Component {
             font-size: .95rem;
           }
 
+          body {
+            background: rgb(229, 234, 237);
+          }
+
           ul, li {
             list-style-position: inside;
           }
@@ -44,6 +48,11 @@ export default class Styling extends Component {
           button:disabled {
             cursor: default;
             background: #698ea5;
+          }
+
+          img {
+            height: 35px;
+            width: auto;
           }
 
           .centered-form {
@@ -84,6 +93,39 @@ export default class Styling extends Component {
 
           .form-field input, .form-field select {
             border: 1px solid #e1e1e1;
+            padding: 10px;
+          }
+
+          .header {
+            display: flex;
+            align-items: center;
+            height: 10vh;
+            width: 100vw;
+            background: -moz-linear-gradient(125deg, rgba(39,107,130,1) 0%, rgba(49,84,129,1) 100%); /* ff3.6+ */
+            background: -webkit-gradient(linear, left top, right bottom, color-stop(0%, rgba(49,84,129,1)), color-stop(100%, rgba(39,107,130,1))); /* safari4+,chrome */
+            background: -webkit-linear-gradient(125deg, rgba(39,107,130,1) 0%, rgba(49,84,129,1) 100%); /* safari5.1+,chrome10+ */
+            background: -o-linear-gradient(125deg, rgba(39,107,130,1) 0%, rgba(49,84,129,1) 100%); /* opera 11.10+ */
+            background: -ms-linear-gradient(125deg, rgba(39,107,130,1) 0%, rgba(49,84,129,1) 100%); /* ie10+ */
+            background: linear-gradient(325deg, rgba(39,107,130,1) 0%, rgba(49,84,129,1) 100%); /* w3c */
+            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+          }
+
+          .header-search {
+            border-radius: 5px;
+            background: rgb(229, 234, 237);
+          }
+
+          .header-logo {
+            padding: 0px 20px;
+            margin: 20px;
+            width: 300px;
+          }
+
+          .button-login {
+            border-radius: 5px;
+            margin: 20px 0;
+            background: rgb(209, 220, 226);
+            color: black;
             padding: 10px;
           }
 
