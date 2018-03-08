@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import Link from 'next/link'
 
 import Styling from './styling'
 
@@ -9,7 +10,11 @@ export default class Header extends Component {
         <Styling />
         <div className="header">
           <div style={{ padding: "20px" }}>
-            <img src="../static/img/LogoWhite.png"></img>
+            <Link href="/">
+              <a>
+                <img src="../static/img/LogoWhite.png"></img>
+              </a>
+            </Link>
           </div>
           <div style={{ flex: 1 }}>
             <div className="form-field">

@@ -112,8 +112,11 @@ export default class Styling extends Component {
           }
 
           .header-search {
-            border-radius: 5px;
             background: rgb(229, 234, 237);
+          }
+
+          input:focus {
+            outline: none;
           }
 
           .header-logo {
@@ -123,7 +126,6 @@ export default class Styling extends Component {
           }
 
           .button-login {
-            border-radius: 5px;
             margin: 20px 0;
             background: transparent;
             color: rgb(229, 234, 237);
