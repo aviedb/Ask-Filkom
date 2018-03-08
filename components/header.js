@@ -1,13 +1,17 @@
 import React, { Component } from 'react'
 import Link from 'next/link'
-
-import Styling from './styling'
+import Head from 'next/head'
 
 export default class Header extends Component {
   render() {
     return(
       <div>
-        <Styling />
+        <Head>
+          <link
+            rel="stylesheet"
+            href="../static/css/styles.css"
+          />
+        </Head>
         <div className="header">
           <div style={{ padding: "20px" }}>
             <Link href="/">
@@ -28,7 +32,9 @@ export default class Header extends Component {
           </div>
           <div style={{ padding: "20px" }}>
             <div className="form-field">
-              <button className="button-login">Log In</button>
+              <Link href="/login">
+                <button className="button-login">Log In</button>
+              </Link>
             </div>
           </div>
         </div>

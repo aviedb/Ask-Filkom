@@ -1,12 +1,16 @@
 import React, { Component } from 'react'
-
-import Styling from '../components/styling'
+import Head from 'next/head'
 
 export default class Signup extends Component {
   render() {
     return(
       <div>
-        <Styling />
+        <Head>
+          <link
+            rel="stylesheet"
+            href="../static/css/styles.css"
+          />
+        </Head>
         <div className="centered-form">
           <div className="centered-form__form">
             <form action="/">
