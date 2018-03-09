@@ -2,6 +2,8 @@ import React, { Component } from 'react'
 import Head from 'next/head'
 import Link from 'next/link'
 
+import TextField from 'material-ui/TextField'
+
 export default class Login extends Component {
   render() {
     return(
@@ -17,14 +19,19 @@ export default class Login extends Component {
               <div className="form-field">
                 <h3>Login</h3>
               </div>
-              <div className="form-field">
-                <label>Username</label>
-                <input type="text" autoFocus/>
-              </div>
-              <div className="form-field">
-                <label>Password</label>
-                <input type="password"/>
-              </div>
+              <TextField
+                autoFocus
+                label="Username"
+                type="text"
+                margin="normal"
+                style={{ width: "100%" }}
+              />
+              <TextField
+                label="Password"
+                type="password"
+                margin="normal"
+                style={{ width: "100%" }}
+              />
               <div className="form-field">
                 <button>Login</button>
               </div>
