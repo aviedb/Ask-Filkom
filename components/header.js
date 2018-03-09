@@ -7,10 +7,7 @@ export default class Header extends Component {
     return(
       <div>
         <Head>
-          <link
-            rel="stylesheet"
-            href="../static/css/styles.css"
-          />
+          <link rel="stylesheet" href="../static/css/styles.css" />
         </Head>
         <div className="header">
           <div style={{ padding: "20px" }}>

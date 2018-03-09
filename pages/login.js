@@ -7,10 +7,9 @@ export default class Login extends Component {
     return(
       <div>
         <Head>
-          <link
-            rel="stylesheet"
-            href="../static/css/styles.css"
-          />
+          <link rel="stylesheet" href="../static/css/styles.css" />
+          <link rel="shortcut icon" href="../static/img/simplified_logo_favicon.ico"/>
+          <title>ask-filkom - Login</title>
         </Head>
         <div className="centered-form">
           <div className="centered-form__form">
@@ -20,7 +19,7 @@ export default class Login extends Component {
               </div>
               <div className="form-field">
                 <label>Username</label>
-                <input type="text" autofocus/>
+                <input type="text" autoFocus/>
               </div>
               <div className="form-field">
                 <label>Password</label>
@@ -29,8 +28,8 @@ export default class Login extends Component {
               <div className="form-field">
                 <button>Login</button>
               </div>
-              <div className="form-field" style={{ justifyContent: "Center" }}>
-                <p>
+              <div className="form-field">
+                <p style={{ textAlign: "center" }}>
                   don{"'"}t have an account?{' '}
                   <Link href="/signup">
                     <a>Signup here</a>
