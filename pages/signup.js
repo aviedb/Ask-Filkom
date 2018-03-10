@@ -52,21 +52,7 @@ export default class Signup extends Component {
                 </div>
               </form>
             </div>
-            <form action="/">
-              <div className="centered-form__form">
-                <div>
-                  <div className="form-field">
-                    <h3>Or Signup with</h3>
-                  </div>
-                  <div className="form-field">
-                    <button className="google-button">Google</button>
-                  </div>
-                  <div className="form-field">
-                    <button className="facebook-button">Facebook</button>
-                  </div>
-                </div>
-              </div>
-            </form>
+            
           </div>
         </div>
       </MuiThemeProvider>
