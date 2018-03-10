@@ -5,7 +5,7 @@ export default class Footer extends Component {
   render() {
     return(
       <div className="footer">
-        <div className="footer__form" style={{textAlign: "left"}}>
+        <div className="footer__form" style={{textAlign: "center"}}>
           <img src="../static/img/Logo.png"/>
         </div>
         <div className="footer__form" style={{ marginTop: "80px" }}>

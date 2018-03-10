@@ -22,6 +22,9 @@ export default class Index extends Component {
           </Head>
           <Header />
           <div style={{ display: "flex" }}>
+            <div className="home__sidebar">
+
+            </div>
             <div style={{ padding: "30px", paddingTop: "100px", flex: 1 }}>
               <ul>
                 <Questions
@@ -49,41 +52,25 @@ export default class Index extends Component {
                   answers="0"
                 />
                 <Questions
-                  username="Satya Nadella"
-                  questionTitle="Bagi kisi-kisi UTS Jarkom dong!"
-                  question="Aku ga paham sama seklai jarkom :("
+                  username="Thanos"
+                  questionTitle="Yang dosen DAA nya pak X, gimana soal kuisnya?"
+                  question="sebarin soalnya dong :( ga belajar aing"
                   time={new Date()}
-                  tags="Jarkom"
+                  tags="DAA"
                   answers="0"
                 />
                 <Questions
-                  username="Satya Nadella"
-                  questionTitle="Bagi kisi-kisi UTS Jarkom dong!"
-                  question="Aku ga paham sama seklai jarkom :("
+                  username="Nadiem Makarin"
+                  questionTitle="Bagaimana cara install Wireshark?"
+                  question="Saya pake OS Ubuntu, bagaimana cara install Wireshark di ubuntu?"
                   time={new Date()}
-                  tags="Jarkom"
+                  tags="Wireshark"
                   answers="0"
                 />
                 <Questions
-                  username="Satya Nadella"
-                  questionTitle="Bagi kisi-kisi UTS Jarkom dong!"
-                  question="Aku ga paham sama seklai jarkom :("
-                  time={new Date()}
-                  tags="Jarkom"
-                  answers="0"
-                />
-                <Questions
-                  username="Satya Nadella"
-                  questionTitle="Bagi kisi-kisi UTS Jarkom dong!"
-                  question="Aku ga paham sama seklai jarkom :("
-                  time={new Date()}
-                  tags="Jarkom"
-                  answers="0"
-                />
-                <Questions
-                  username="Satya Nadella"
-                  questionTitle="Bagi kisi-kisi UTS Jarkom dong!"
-                  question="Aku ga paham sama seklai jarkom :("
+                  username="Tony Stark"
+                  questionTitle="Apa ada alternatif XAMPP untuk macOS yang bagus?"
+                  question="XAMPP di macOS cacat soalnya :("
                   time={new Date()}
                   tags="Jarkom"
                   answers="0"
