@@ -5,7 +5,7 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 import getMuiTheme from 'material-ui/styles/getMuiTheme'
 import TextField from 'material-ui/TextField'
 
-import { auth } from '../firebase/index'
+import { auth } from '../firebase'
 
 const muiTheme = getMuiTheme({ userAgent: false })
 
@@ -126,8 +126,13 @@ export default class Signup extends Component {
                 <div className="form-field">
                   <button type="submit" disabled={isInvalid}>Sign Up</button>
                 </div>
-
-                {error && <p>{error.message}</p>}
+                {error &&
+                  <div className="form-field">
+                    <p style={{ textAlign: "center", color: "red" }}>
+                      {error.message}
+                    </p>
+                  </div>
+                }
               </form>
             </div>
 
