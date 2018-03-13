@@ -18,7 +18,7 @@ export default class Index extends Component {
             <link rel="stylesheet" href="../static/css/styles.css" />
             <link rel="shortcut icon" href="../static/img/simplified_logo_favicon.ico"/>
             <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-            <title>ask-filkom - Home</title>
+            <title>Home - ask-filkom</title>
           </Head>
           <Header />
           <div style={{ display: "flex" }}>

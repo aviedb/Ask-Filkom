@@ -15,7 +15,7 @@ export default class Login extends Component {
           <Head>
             <link rel="stylesheet" href="../static/css/styles.css" />
             <link rel="shortcut icon" href="../static/img/simplified_logo_favicon.ico"/>
-            <title>ask-filkom - Login</title>
+            <title>ask-Login - ask-filkom</title>
           </Head>
           <div className="centered-form">
             <div className="centered-form__form">

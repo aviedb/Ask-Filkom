@@ -70,7 +70,7 @@ export default class Signup extends Component {
           <Head>
             <link rel="stylesheet" href="../static/css/styles.css" />
             <link rel="shortcut icon" href="../static/img/simplified_logo_favicon.ico"/>
-            <title>ask-filkom - Signup</title>
+            <title>Sign Up - ask-filkom</title>
           </Head>
           <div className="centered-form">
             <div className="centered-form__form">
