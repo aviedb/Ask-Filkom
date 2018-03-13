@@ -8,7 +8,7 @@ export default class Header extends Component {
         <div style={{ padding: "20px" }}>
           <Link href="/">
             <a>
-              <img src="../static/img/LogoWhite.png"></img>
+              <img src="../static/img/LogoWhite.png" />
             </a>
           </Link>
         </div>
@@ -19,7 +19,8 @@ export default class Header extends Component {
               style={{ background: "rgb(229, 234, 237)" }}
               autoFocus
               placeholder="Search..."
-            ></input>
+            >
+            </input>
           </div>
         </div>
         <div style={{ padding: "20px" }}>
