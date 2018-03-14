@@ -7,6 +7,8 @@ import getMuiTheme from 'material-ui/styles/getMuiTheme'
 import TextField from 'material-ui/TextField'
 
 import { auth } from '../firebase'
+import SimplifiedHeader from '../components/simplifiedHeader'
+import SimplifiedErrorMessage from '../utils/simplifiedErrorMessage'
 
 const muiTheme = getMuiTheme({ userAgent: false })
 
@@ -65,6 +67,7 @@ export default class Login extends Component {
             <link rel="shortcut icon" href="../static/img/simplified_logo_favicon.ico"/>
             <title>ask-Login - ask-filkom</title>
           </Head>
+          <SimplifiedHeader />
           <div className="centered-form">
             <div className="centered-form__form">
               <form onSubmit={this.onSubmit}>
@@ -97,20 +100,18 @@ export default class Login extends Component {
                 <div className="form-field">
                   <button disabled={isInvalid}>Login</button>
                 </div>
-                {!error &&
-                  <div className="form-field">
-                    <p style={{ textAlign: "center" }}>
-                      don{"'"}t have an account?{' '}
-                      <Link href="/signup">
-                        <a>Signup here</a>
-                      </Link>
-                    </p>
-                  </div>
-                }
+                <div className="form-field">
+                  <p style={{ textAlign: "center" }}>
+                    don{"'"}t have an account?{' '}
+                    <Link href="/signup">
+                      <a>Signup here</a>
+                    </Link>
+                  </p>
+                </div>
                 {error &&
                   <div className="form-field">
                     <p style={{ textAlign: "center", color: "red" }}>
-                      {error.message}
+                      {SimplifiedErrorMessage(error.message, this.state.email)}
                     </p>
                   </div>
                 }

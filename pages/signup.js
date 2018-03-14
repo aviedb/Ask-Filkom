@@ -4,8 +4,11 @@ import Router from 'next/router'
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 import getMuiTheme from 'material-ui/styles/getMuiTheme'
 import TextField from 'material-ui/TextField'
+import LinearProgress from 'material-ui/LinearProgress'
 
 import { auth } from '../firebase'
+import SimplifiedHeader from '../components/simplifiedHeader'
+import SimplifiedErrorMessage from '../utils/simplifiedErrorMessage'
 
 const muiTheme = getMuiTheme({ userAgent: false })
 
@@ -72,6 +75,7 @@ export default class Signup extends Component {
             <link rel="shortcut icon" href="../static/img/simplified_logo_favicon.ico"/>
             <title>Sign Up - ask-filkom</title>
           </Head>
+          <SimplifiedHeader />
           <div className="centered-form">
             <div className="centered-form__form">
               <form onSubmit={this.onSubmit}>
@@ -129,7 +133,7 @@ export default class Signup extends Component {
                 {error &&
                   <div className="form-field">
                     <p style={{ textAlign: "center", color: "red" }}>
-                      {error.message}
+                      {SimplifiedErrorMessage(error.message, this.state.email)}
                     </p>
                   </div>
                 }
