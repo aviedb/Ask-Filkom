@@ -3,10 +3,13 @@ const SimplifiedErrorMessage = (error, email) => {
     return `${email} is not a valid email.`
 
   if(error === 'The email address is already in use by another account.')
-    return `${email} is already used by another account`
+    return `${email} is already used by another account.`
 
   if(error === 'The password is invalid or the user does not have a password.')
-    return `Incorrect password for ${email}`
+    return `Incorrect password for ${email}.`
+
+  if(error === 'There is no user record corresponding to this identifier. The user may have been deleted.')
+    return `${email} did not match any account.`
 
   return error
 }
