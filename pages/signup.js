@@ -17,7 +17,8 @@ const INITIAL_STATE = {
   email: '',
   passwordOne: '',
   passwordTwo: '',
-  error: null
+  error: null,
+  signupLoading: false
 }
 
 const byPropKey = (propertyName, value) => ({
@@ -32,6 +33,7 @@ export default class Signup extends Component {
   }
 
   onSubmit = (event) => {
+    this.setState(byPropKey('signupLoading', true))
 
     const {
       username,
@@ -45,7 +47,10 @@ export default class Signup extends Component {
         Router.push('/')
       })
       .catch(error => {
-        this.setState(byPropKey('error', error))
+        this.setState({
+          error,
+          signupLoading: false
+        })
       })
 
     event.preventDefault()
@@ -128,7 +133,13 @@ export default class Signup extends Component {
                     this.setState(byPropKey('passwordTwo', event.target.value))}
                 />
                 <div className="form-field">
-                  <button type="submit" disabled={isInvalid}>Sign Up</button>
+                  {this.state.signupLoading && <LinearProgress
+                    style={{ position: "absolute", width: "258px" }}
+                    color="rgb(39, 107, 129)"
+                  />}
+                  <button type="submit" disabled={isInvalid || this.state.signupLoading}>
+                    Sign Up
+                  </button>
                 </div>
                 {error &&
                   <div className="form-field">

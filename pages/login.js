@@ -5,6 +5,7 @@ import Router from 'next/router'
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 import getMuiTheme from 'material-ui/styles/getMuiTheme'
 import TextField from 'material-ui/TextField'
+import LinearProgress from 'material-ui/LinearProgress'
 
 import { auth } from '../firebase'
 import SimplifiedHeader from '../components/simplifiedHeader'
@@ -15,7 +16,8 @@ const muiTheme = getMuiTheme({ userAgent: false })
 const INITIAL_STATE = {
   email: '',
   password: '',
-  error: null
+  error: null,
+  loginLoading: false
 }
 
 const byPropKey = (propertyName, value) => ({
@@ -30,6 +32,8 @@ export default class Login extends Component {
   }
 
   onSubmit = (event) => {
+    this.setState(byPropKey('loginLoading', true))
+
     const {
       email,
       password
@@ -41,7 +45,10 @@ export default class Login extends Component {
         Router.push('/')
       })
       .catch(error => {
-        this.setState(byPropKey('error', error))
+        this.setState({
+          error,
+          loginLoading: false
+        })
       })
 
       event.preventDefault()
@@ -98,7 +105,13 @@ export default class Login extends Component {
                     this.setState(byPropKey('password', event.target.value))}
                 />
                 <div className="form-field">
-                  <button disabled={isInvalid}>Login</button>
+                  {this.state.loginLoading && <LinearProgress
+                    style={{ position: "absolute", width: "258px" }}
+                    color="rgb(39, 107, 129)"
+                  />}
+                  <button disabled={isInvalid || this.state.loginLoading}>
+                    Login
+                  </button>
                 </div>
                 <div className="form-field">
                   <p style={{ textAlign: "center" }}>
