@@ -3,6 +3,7 @@ import Head from 'next/head'
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 import getMuiTheme from 'material-ui/styles/getMuiTheme'
 
+import { firebase, auth } from '../firebase'
 import Header from '../components/header'
 import Footer from '../components/footer'
 import Questions from '../components/questions'
@@ -10,6 +11,22 @@ import Questions from '../components/questions'
 const muiTheme = getMuiTheme({ userAgent: false })
 
 export default class Index extends Component {
+  constructor(props) {
+    super(props)
+
+    this.state = {
+      authUser: null
+    }
+  }
+
+  componentDidMount() {
+    firebase.auth.onAuthStateChanged(authUser => {
+      authUser
+        ? this.setState(() => ({authUser}))
+        : this.setState(() => ({authUser: null}))
+    })
+  }
+
   render() {
     return(
       <MuiThemeProvider muiTheme={muiTheme}>
@@ -20,7 +37,7 @@ export default class Index extends Component {
             <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
             <title>Home - ask-filkom</title>
           </Head>
-          <Header />
+          <Header user={this.state.authUser}/>
           <div style={{ display: "flex" }}>
             <div className="home__sidebar">
 

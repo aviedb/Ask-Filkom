@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 import Link from 'next/link'
 
+import SignOutButton from './signout'
+
 export default class Header extends Component {
   render() {
     return(
@@ -25,9 +27,12 @@ export default class Header extends Component {
         </div>
         <div style={{ padding: "20px" }}>
           <div className="form-field">
-            <Link href="/login">
-              <button className="button-login">Log In</button>
-            </Link>
+            {this.props.user
+              ? <SignOutButton />
+              : <Link href="/login">
+                <button className="button-login">Log In</button>
+              </Link>
+            }
           </div>
         </div>
       </div>
