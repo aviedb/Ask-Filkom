@@ -94,7 +94,7 @@ export default class Login extends Component {
                   autoFocus
                   floatingLabelText="Email"
                   floatingLabelStyle={{ color: "rgb(39, 94, 130)" }}
-                  type="email"
+                  type="text"
                   style={{ width: "100%" }}
                   underlineStyle={{ borderColor: "rgb(39, 107, 129)" }}
                   underlineFocusStyle={{ borderColor: "rgb(39, 94, 130)" }}
