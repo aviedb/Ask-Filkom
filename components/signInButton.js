@@ -4,7 +4,7 @@ import FlatButton from 'material-ui/FlatButton'
 
 const signIn = () => (
     <div className="form-field">
-      <Link href="/login">
+      <Link href="/signIn">
         <FlatButton
           label="Sign In"
           labelStyle={{color: "white"}}

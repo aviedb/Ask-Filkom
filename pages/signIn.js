@@ -89,7 +89,7 @@ export default class Login extends Component {
           <Head>
             <link rel="stylesheet" href="../static/css/styles.css" />
             <link rel="shortcut icon" href="../static/img/simplified_logo_favicon.ico"/>
-            <title>ask-Login - ask-filkom</title>
+            <title>Sign In - ask-filkom</title>
           </Head>
           <SimplifiedHeader />
           <div className="centered-form">
@@ -142,7 +142,7 @@ export default class Login extends Component {
                 <div className="form-field">
                   <p style={{ textAlign: "center" }}>
                     don{"'"}t have an account?{' '}
-                    <Link href="/signup">
+                    <Link href="/signUp">
                       <a>Signup here</a>
                     </Link>
                   </p>
