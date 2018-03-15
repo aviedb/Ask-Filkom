@@ -4,10 +4,11 @@ import Router from 'next/router'
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 import getMuiTheme from 'material-ui/styles/getMuiTheme'
 import TextField from 'material-ui/TextField'
-import LinearProgress from 'material-ui/LinearProgress'
+import RaisedButton from 'material-ui/RaisedButton'
+import CircularProgress from 'material-ui/CircularProgress'
 import Snackbar from 'material-ui/Snackbar'
 
-import { auth } from '../firebase'
+import { firebase, auth } from '../firebase'
 import SimplifiedHeader from '../components/simplifiedHeader'
 import SimplifiedErrorMessage from '../utils/simplifiedErrorMessage'
 
@@ -32,6 +33,13 @@ export default class Signup extends Component {
     super(props)
 
     this.state = { ...INITIAL_STATE }
+  }
+
+  componentDidMount() {
+    firebase.auth.onAuthStateChanged(user => {
+      if(user)
+        Router.push('/')
+    })
   }
 
   onSubmit = (event) => {
@@ -142,13 +150,22 @@ export default class Signup extends Component {
                     this.setState(byPropKey('passwordTwo', event.target.value))}
                 />
                 <div className="form-field">
-                  {this.state.signupLoading && <LinearProgress
-                    style={{ position: "absolute", width: "258px" }}
-                    color="rgb(39, 107, 129)"
-                  />}
-                  <button type="submit" disabled={isInvalid || this.state.signupLoading}>
-                    Sign Up
-                  </button>
+                  {this.state.signupLoading &&
+                    <CircularProgress
+                      style={{ position: "absolute", width: "258px", zIndex: "1", marginLeft: "112px" }}
+                      color="white"
+                      size={35}
+                    />
+                  }
+                  <RaisedButton
+                    label="Sign In"
+                    backgroundColor="rgb(38, 95, 130)"
+                    labelColor="white"
+                    disabledBackgroundColor="#698EA5"
+                    disabled={isInvalid || this.state.signupLoading}
+                    onClick={this.onSubmit}
+                    type="submit"
+                  />
                 </div>
                 { error &&
                   <Snackbar

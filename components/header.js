@@ -1,7 +1,8 @@
 import React, { Component } from 'react'
 import Link from 'next/link'
 
-import SignOutButton from './signout'
+import SignOutButton from './signOutButton'
+import SignInButton from './signInButton'
 
 export default class Header extends Component {
   render() {
@@ -29,9 +30,7 @@ export default class Header extends Component {
           <div className="form-field">
             {this.props.user
               ? <SignOutButton />
-              : <Link href="/login">
-                <button className="button-login">Log In</button>
-              </Link>
+              : <SignInButton />
             }
           </div>
         </div>
