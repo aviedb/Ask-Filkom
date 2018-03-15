@@ -5,6 +5,7 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 import getMuiTheme from 'material-ui/styles/getMuiTheme'
 import TextField from 'material-ui/TextField'
 import LinearProgress from 'material-ui/LinearProgress'
+import Snackbar from 'material-ui/Snackbar'
 
 import { auth } from '../firebase'
 import SimplifiedHeader from '../components/simplifiedHeader'
@@ -18,7 +19,8 @@ const INITIAL_STATE = {
   passwordOne: '',
   passwordTwo: '',
   error: null,
-  signupLoading: false
+  signupLoading: false,
+  openSnackbar: false
 }
 
 const byPropKey = (propertyName, value) => ({
@@ -49,11 +51,18 @@ export default class Signup extends Component {
       .catch(error => {
         this.setState({
           error,
-          signupLoading: false
+          signupLoading: false,
+          openSnackbar: true
         })
       })
 
     event.preventDefault()
+  }
+
+  handleRequestClose = () => {
+    this.setState({
+      openSnackbar: false
+    })
   }
 
   render() {
@@ -141,12 +150,13 @@ export default class Signup extends Component {
                     Sign Up
                   </button>
                 </div>
-                {error &&
-                  <div className="form-field">
-                    <p style={{ textAlign: "center", color: "red" }}>
-                      {SimplifiedErrorMessage(error.message, this.state.email)}
-                    </p>
-                  </div>
+                { error &&
+                  <Snackbar
+                    open={this.state.openSnackbar}
+                    message={SimplifiedErrorMessage(error.message, email)}
+                    autoHideDuration={4000}
+                    onRequestClose={this.handleRequestClose}
+                  />
                 }
               </form>
             </div>
