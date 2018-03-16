@@ -15,7 +15,41 @@ export default class Index extends Component {
     super(props)
 
     this.state = {
-      authUser: null
+      authUser: null,
+      questions: [
+        {
+          username: 'username',
+          questionTitle: 'question title',
+          question: 'question',
+          time: new Date(),
+          tags: 'tag',
+          answers: 9
+        },
+        {
+          username: 'avied',
+          questionTitle: 'How to define a variable in Java?',
+          question: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
+          time: new Date(),
+          tags: 'Java',
+          answers: 999
+        },
+        {
+          username: 'M\'Baku',
+          questionTitle: 'Nyeh',
+          question: 'Isi pertanyaan dari M\'Baku terproteksi',
+          time: new Date(),
+          tags: 'Wakanda',
+          answers: 0
+        },
+        {
+          username: 'Satya Nadella',
+          questionTitle: 'Bagi kisi-kisi UTS Jarkom dong!',
+          question: 'Aku ga paham sama seklai jarkom :(',
+          time: new Date(),
+          tags: 'Jarkom',
+          answers: 2
+        },
+      ]
     }
   }
 
@@ -28,6 +62,8 @@ export default class Index extends Component {
   }
 
   render() {
+    const { questions, authUser } = this.state
+
     return(
       <MuiThemeProvider muiTheme={muiTheme}>
         <div>
@@ -44,58 +80,17 @@ export default class Index extends Component {
             </div>
             <div style={{ padding: "30px", paddingTop: "100px", flex: 1 }}>
               <ul>
-                <Questions
-                  username="Username"
-                  questionTitle="Question Title"
-                  question="Question"
-                  time={new Date()}
-                  tags="tag"
-                  answers="9"
-                />
-                <Questions
-                  username="Avied"
-                  questionTitle="How to define a variable in Java?"
-                  question="Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
-                  time={new Date()}
-                  tags="Java"
-                  answers="999"
-                />
-                <Questions
-                  username="Satya Nadella"
-                  questionTitle="Bagi kisi-kisi UTS Jarkom dong!"
-                  question="Aku ga paham sama seklai jarkom :("
-                  time={new Date()}
-                  tags="Jarkom"
-                  answers="0"
-                />
-                <Questions
-                  username="Thanos"
-                  questionTitle="Yang dosen DAA nya pak X, gimana soal kuisnya?"
-                  question="sebarin soalnya dong :( ga belajar aing"
-                  time={new Date()}
-                  tags="DAA"
-                  answers="0"
-                />
-                <Questions
-                  username="Nadiem Makarin"
-                  questionTitle="Bagaimana cara install Wireshark?"
-                  question="Saya pake OS Ubuntu, bagaimana cara install Wireshark di ubuntu?"
-                  time={new Date()}
-                  tags="Wireshark"
-                  answers="0"
-                />
-                <Questions
-                  username="Tony Stark"
-                  questionTitle="Apa ada alternatif XAMPP untuk macOS yang bagus?"
-                  question="XAMPP di macOS cacat soalnya :("
-                  time={new Date()}
-                  tags="Jarkom"
-                  answers="0"
-                />
+                {
+                  questions.map(question => (
+                    <Questions
+                      {...question}
+                    />
+                  ))
+                }
               </ul>
             </div>
-            <div className="home__sidebar">
-
+            <div className="home__sidebar" style={{paddingTop: "100px"}}>
+              {authUser && <p>You are signed in as {authUser.email}</p>}
             </div>
           </div>
           <Footer />
