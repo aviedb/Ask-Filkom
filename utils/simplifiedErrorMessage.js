@@ -11,6 +11,9 @@ const SimplifiedErrorMessage = (error, email) => {
   if(error === 'There is no user record corresponding to this identifier. The user may have been deleted.')
     return `${email} did not match any account.`
 
+  if(error === 'A network error (such as timeout, interrupted connection or unreachable host) has occurred.')
+    return 'Connection error. Please try again later.'
+
   return error
 }
 
