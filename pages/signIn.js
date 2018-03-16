@@ -134,6 +134,7 @@ export default class Login extends Component {
                     backgroundColor="rgb(38, 95, 130)"
                     labelColor="white"
                     disabledBackgroundColor="#698EA5"
+                    disabledLabelColor="white"
                     disabled={isInvalid || this.state.loginLoading}
                     onClick={this.onSubmit}
                     type="submit"
