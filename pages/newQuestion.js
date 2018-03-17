@@ -8,7 +8,7 @@ import TextField from 'material-ui/TextField'
 import RaisedButton from 'material-ui/RaisedButton'
 import CircularProgress from 'material-ui/CircularProgress'
 
-import { firebase } from '../firebase'
+import { firebase, auth, db } from '../firebase'
 import Header from '../components/header'
 import Footer from '../components/footer'
 
@@ -18,7 +18,6 @@ const INITIAL_STATE = {
   title: '',
   question: '',
   tags: '',
-  time: '',
   loadingSubmit: false
 }
 
@@ -49,9 +48,21 @@ export default class NewQuestion extends Component {
 
   handleClick = () => {
     this.setState({
-      loadingSubmit: true,
-      time: new Date().getTime()
+      loadingSubmit: true
     })
+
+    const {
+      authUser,
+      title,
+      question,
+      tags
+    } = this.state
+
+    db.doCreateQuestion(authUser.uid, authUser.email, title, question, tags, new Date().getTime())
+      .then(() => {
+        this.setState(() => {INITIAL_STATE})
+        Router.push('/')
+      })
 
   }
 
