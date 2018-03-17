@@ -52,8 +52,8 @@ export default class Answers extends Component {
   showQuestion(snapshot) {
     let qAnswers = []
 
-    if(snapshot.qAnswers) {
-      qAnswers = Object.entries(snapshot.qAnswers)
+    if(snapshot.qAnswer) {
+      qAnswers = Object.entries(snapshot.qAnswer)
         .map((item) => Object.assign({}, {key: item[0]}, item[1]))
     }
 
@@ -149,9 +149,11 @@ export default class Answers extends Component {
                       </h3>
                       <ul style={{paddingBottom: "20px", borderBottom: "1px solid #265C7D"}}>
                         {qAnswers.map((qAnswer) =>
-                          <Answer />
+                          <Answer
+                            id={qAnswer.key}
+                            {...qAnswer}
+                          />
                         )}
-                        NYEH
                       </ul>
                     </div>
                   }
