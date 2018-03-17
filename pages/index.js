@@ -2,11 +2,14 @@ import React, { Component } from 'react'
 import Head from 'next/head'
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 import getMuiTheme from 'material-ui/styles/getMuiTheme'
+import RaisedButton from 'material-ui/RaisedButton'
 
 import { firebase, auth } from '../firebase'
 import Header from '../components/header'
 import Footer from '../components/footer'
 import Questions from '../components/questions'
+import SignedInSidebar from '../components/signedInSidebar'
+import NotSignedInSidebar from '../components/notSignedInSidebar'
 
 const muiTheme = getMuiTheme({ userAgent: false })
 
@@ -49,6 +52,22 @@ export default class Index extends Component {
           tags: 'Jarkom',
           answers: 2
         },
+        {
+          username: 'Satya Nadella',
+          questionTitle: 'Bagi kisi-kisi UTS Jarkom dong!',
+          question: 'Aku ga paham sama seklai jarkom :(',
+          time: new Date(),
+          tags: 'Jarkom',
+          answers: 2
+        },
+        {
+          username: 'Satya Nadella',
+          questionTitle: 'Bagi kisi-kisi UTS Jarkom dong!',
+          question: 'Aku ga paham sama seklai jarkom :(',
+          time: new Date(),
+          tags: 'Jarkom',
+          answers: 2
+        },
       ]
     }
   }
@@ -75,10 +94,13 @@ export default class Index extends Component {
           </Head>
           <Header user={this.state.authUser}/>
           <div style={{ display: "flex" }}>
-            <div className="home__sidebar">
-
+            <div className="home__sidebar" style={{padding: "30px", paddingTop: "100px"}}>
+              { authUser
+                ? <SignedInSidebar authUser={authUser}/>
+                : <NotSignedInSidebar />
+              }
             </div>
-            <div style={{ padding: "30px", paddingTop: "100px", flex: 1 }}>
+            <div style={{ padding: "30px", paddingTop: "100px", flex: 1, marginLeft: "10px" }}>
               <ul>
                 {
                   questions.map(question => (
@@ -90,7 +112,7 @@ export default class Index extends Component {
               </ul>
             </div>
             <div className="home__sidebar" style={{paddingTop: "100px"}}>
-              {authUser && <p>You are signed in as {authUser.email}</p>}
+
             </div>
           </div>
           <Footer />

@@ -59,6 +59,18 @@ img {
   width: auto;
 }
 
+textarea {
+  width: 100%;
+  resize: vertical;
+  margin-top: 10px;
+  border-radius: 2px;
+  border: 1px solid rgb(39, 94, 130);
+}
+
+textarea:focus {
+  outline: none;
+}
+
 .centered-form {
   display: flex;
   align-items: center;
@@ -186,7 +198,7 @@ input:focus {
   color: rgb(0, 0, 0);
 }
 
-@media (max-width: 600px) {
+@media (max-width: 800px) {
   * {
       font-size: 1rem;
     }

@@ -20,7 +20,6 @@ export default class Header extends Component {
             <input
               type="text"
               style={{ background: "rgb(229, 234, 237)" }}
-              autoFocus
               placeholder="Search..."
             >
             </input>
