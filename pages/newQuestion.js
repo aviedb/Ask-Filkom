@@ -6,6 +6,7 @@ import getMuiTheme from 'material-ui/styles/getMuiTheme'
 import Paper from 'material-ui/Paper'
 import TextField from 'material-ui/TextField'
 import RaisedButton from 'material-ui/RaisedButton'
+import CircularProgress from 'material-ui/CircularProgress'
 
 import { firebase } from '../firebase'
 import Header from '../components/header'
@@ -13,12 +14,25 @@ import Footer from '../components/footer'
 
 const muiTheme = getMuiTheme({ userAgent: false })
 
+const INITIAL_STATE = {
+  title: '',
+  question: '',
+  tags: '',
+  time: '',
+  loadingSubmit: false
+}
+
+const byPropKey = (propertyName, value) => ({
+  [propertyName]: value
+})
+
 export default class NewQuestion extends Component {
   constructor(props) {
     super(props)
 
     this.state = {
-      authUser: null
+      authUser: null,
+      ...INITIAL_STATE
     }
   }
 
@@ -33,8 +47,29 @@ export default class NewQuestion extends Component {
     })
   }
 
+  handleClick = () => {
+    this.setState({
+      loadingSubmit: true,
+      time: new Date().getTime()
+    })
+
+  }
+
   render() {
-    const { authUser } = this.state
+    const {
+      authUser,
+      title,
+      question,
+      tags,
+      time,
+      loadingSubmit
+    } = this.state
+
+    const isInvalid =
+      title === '' ||
+      question === '' ||
+      tags === ''
+
 
     return (
       <MuiThemeProvider muiTheme={muiTheme}>
@@ -60,17 +95,49 @@ export default class NewQuestion extends Component {
                   fullWidth={true}
                   underlineStyle={{ borderColor: "rgb(39, 107, 129)" }}
                   underlineFocusStyle={{ borderColor: "rgb(39, 94, 130)" }}
-                  style={{marginBottom: "20px"}}
+                  style={{marginBottom: "10px"}}
+                  value={title}
+                  onChange={event =>
+                    this.setState(byPropKey('title', event.target.value))}
                 />
-                <textarea rows={10} placeholder="Your Question" style={{padding: "10px"}}/>
-                  <RaisedButton
-                    label="Submit"
-                    backgroundColor="rgb(38, 95, 130)"
-                    labelColor="white"
-                    disabledBackgroundColor="#698EA5"
-                    disabledLabelColor="white"
-                    style={{marginTop: "10px"}}
+                <textarea
+                  rows={10}
+                  placeholder="Question"
+                  style={{padding: "10px"}}
+                  value={question}
+                  onChange={event =>
+                    this.setState(byPropKey('question', event.target.value))}
+                />
+                <div style={{textAlign: "left"}}>
+                  <TextField
+                    floatingLabelText="Tags"
+                    floatingLabelStyle={{ color: "rgb(39, 94, 130)" }}
+                    type="text"
+                    underlineStyle={{ borderColor: "rgb(39, 107, 129)" }}
+                    underlineFocusStyle={{ borderColor: "rgb(39, 94, 130)" }}
+                    style={{width: "50%"}}
+                    value={tags}
+                    onChange={event =>
+                      this.setState(byPropKey('tags', event.target.value))}
                   />
+                </div>
+                { loadingSubmit &&
+                  <CircularProgress
+                    style={{ position: "absolute", marginTop: "10px", marginLeft: "27px", zIndex: "1"}}
+                    color="white"
+                    size={35}
+                  />
+                }
+                <RaisedButton
+                  label="Submit"
+                  backgroundColor="rgb(38, 95, 130)"
+                  labelColor="white"
+                  disabledBackgroundColor="#698EA5"
+                  disabledLabelColor="white"
+                  style={{marginTop: "10px"}}
+                  disabled={isInvalid || loadingSubmit}
+                  onClick={this.handleClick}
+                />
               </Paper>
             </div>
             <div className="home__sidebar">
