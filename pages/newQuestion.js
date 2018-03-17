@@ -60,7 +60,7 @@ export default class NewQuestion extends Component {
 
     db.doCreateQuestion(authUser.uid, authUser.email, title, question, tags, new Date().getTime())
       .then(() => {
-        this.setState(() => {INITIAL_STATE})
+        this.setState(() => ({...INITIAL_STATE}))
         Router.push('/')
       })
 
