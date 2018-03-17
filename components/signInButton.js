@@ -3,7 +3,7 @@ import Link from 'next/link'
 import FlatButton from 'material-ui/FlatButton'
 
 const signIn = () => (
-    <div className="form-field">
+    <div  style={{textAlign: "right"}}>
       <Link href="/signIn">
         <FlatButton
           label="Sign In"

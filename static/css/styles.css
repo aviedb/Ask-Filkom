@@ -129,7 +129,7 @@ textarea:focus {
 }
 
 .header-search {
-  background: rgb(229, 234, 237);
+  background: white;
 }
 
 .footer {
@@ -189,6 +189,11 @@ input:focus {
   text-align: left;
 }
 
+.sideHeader {
+  padding: 20px;
+  width: 250px;
+}
+
 .facebook-button {
   background: rgb(66, 102, 178);
 }
@@ -200,8 +205,13 @@ input:focus {
 
 @media (max-width: 800px) {
   * {
-      font-size: 1rem;
-    }
+    font-size: 1rem;
+  }
+
+  .sideHeader {
+    padding: 20px;
+    width: auto;
+  }
 
   .home__sidebar {
     display: none;

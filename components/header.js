@@ -8,7 +8,7 @@ export default class Header extends Component {
   render() {
     return(
       <div className="header">
-        <div style={{ padding: "20px" }}>
+        <div className="sideHeader" style={{padding: "30px"}}>
           <Link href="/">
             <a>
               <img src="../static/img/LogoWhite.png" />
@@ -19,13 +19,13 @@ export default class Header extends Component {
           <div className="form-field">
             <input
               type="text"
-              style={{ background: "rgb(229, 234, 237)" }}
+              style={{ background: "#FFFFFF", borderRadius: "2px" }}
               placeholder="Search..."
             >
             </input>
           </div>
         </div>
-        <div style={{ padding: "20px" }}>
+        <div className="sideHeader">
           <div className="form-field">
             {this.props.user
               ? <SignOutButton />
