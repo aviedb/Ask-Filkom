@@ -16,3 +16,17 @@ export const doGetQuestions = (callback) =>
 
 export const doGetQuestion = (id, callback) =>
   db.ref(`Question/${id}`).on('value', callback)
+
+export const doCreateAnswer = (id, senderId, senderEmail, answer, vote, time) =>
+  db.ref(`Question/${id}/qAnswer`).push().set({
+    senderId,
+    senderEmail,
+    answer,
+    vote,
+    time
+  })
+
+export const doUpdateAnswerCount = (id, answers) =>
+  db.ref(`Question/${id}`).update({
+    answers: answers +1
+  })
