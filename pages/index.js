@@ -81,8 +81,10 @@ export default class Index extends Component {
                 }
               </ul>
             </div>
-            <div className="home__sidebar" style={{paddingTop: "100px"}}>
-
+            <div className="home__sidebar" style={{padding: "30px", paddingTop: "100px"}}>
+              <Paper style={{width: "100%", height: "100%", marginTop: "10px", padding: "10px"}}>
+                Ads
+              </Paper>
             </div>
           </div>
           <Footer />
