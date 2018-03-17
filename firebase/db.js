@@ -13,3 +13,6 @@ export const doCreateQuestion = (senderId, senderEmail, title, question, tags, t
 
 export const doGetQuestions = (callback) =>
   db.ref('Question').on('value', callback)
+
+export const doGetQuestion = (id, callback) =>
+  db.ref(`Question/${id}`).on('value', callback)

@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import Link from 'next/link'
 import moment from 'moment'
 import {Card, CardActions, CardHeader, CardText} from 'material-ui/Card'
 import RaisedButton from 'material-ui/RaisedButton'
@@ -28,11 +29,13 @@ export default class Questions extends Component {
           >
             {this.props.question}
             <CardActions style={{padding:"0", paddingTop: "20px" }}>
-              <RaisedButton
-                backgroundColor="rgb(38, 95, 130)"
-                labelColor="white"
-                label={`${this.props.answers} Answers`}
-              />
+              <Link href={`/answers?id=${this.props.id}`}>
+                <RaisedButton
+                  backgroundColor="rgb(38, 95, 130)"
+                  labelColor="white"
+                  label={`${this.props.answers} Answers`}
+                />
+              </Link>
             </CardActions>
           </CardText>
         </Card>

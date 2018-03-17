@@ -75,7 +75,8 @@ export default class Index extends Component {
                 {
                   questions.map(question => (
                     <Questions
-                      {...question}
+                      id={question.key}
+                      { ...question }
                     />
                   ))
                 }
