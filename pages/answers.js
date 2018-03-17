@@ -157,38 +157,40 @@ export default class Answers extends Component {
                       </ul>
                     </div>
                   }
-                  <div>
-                    <p style={{fontWeight: "600", marginTop: "30px"}}>
-                      Your Answer
-                    </p>
-                    <textarea
-                      rows={10}
-                      placeholder="Answer here"
-                      style={{padding: "10px"}}
-                      value={myAnswer}
-                      onChange={event =>
-                        this.setState(byPropKey('myAnswer', event.target.value))}
-                    />
+                  {authUser &&
                     <div>
-                      {loadingSubmit &&
-                        <CircularProgress
-                          style={{ position: "absolute", marginTop: "10px", marginLeft: "27px", zIndex: "1"}}
-                          color="white"
-                          size={35}
-                        />
-                      }
-                      <RaisedButton
-                        label="Submit"
-                        backgroundColor="rgb(38, 95, 130)"
-                        labelColor="white"
-                        disabledBackgroundColor="#698EA5"
-                        disabledLabelColor="white"
-                        disabled={isInvalid || loadingSubmit}
-                        style={{marginTop: "10px"}}
-                        onClick={this.handleClick}
+                      <p style={{fontWeight: "600", marginTop: "30px"}}>
+                        Your Answer
+                      </p>
+                      <textarea
+                        rows={10}
+                        placeholder="Answer here"
+                        style={{padding: "10px"}}
+                        value={myAnswer}
+                        onChange={event =>
+                          this.setState(byPropKey('myAnswer', event.target.value))}
                       />
+                      <div>
+                        {loadingSubmit &&
+                          <CircularProgress
+                            style={{ position: "absolute", marginTop: "10px", marginLeft: "27px", zIndex: "1"}}
+                            color="white"
+                            size={35}
+                          />
+                        }
+                        <RaisedButton
+                          label="Submit"
+                          backgroundColor="rgb(38, 95, 130)"
+                          labelColor="white"
+                          disabledBackgroundColor="#698EA5"
+                          disabledLabelColor="white"
+                          disabled={isInvalid || loadingSubmit}
+                          style={{marginTop: "10px"}}
+                          onClick={this.handleClick}
+                        />
+                      </div>
                     </div>
-                  </div>
+                  }
                 </Paper>
               }
             </div>
