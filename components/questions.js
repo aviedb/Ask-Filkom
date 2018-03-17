@@ -10,9 +10,9 @@ export default class Questions extends Component {
       <div>
         <Card style={{margin: "10px 0"}}>
           <CardHeader
-            title={this.props.questionTitle}
+            title={this.props.title}
             titleStyle={{ fontWeight: "600" }}
-            subtitle={`${this.props.username}. ${moment(this.props.time).calendar()}`}
+            subtitle={`${this.props.senderEmail}. ${moment(this.props.time).calendar()}`}
             actAsExpander={true}
             showExpandableButton={true}
           >

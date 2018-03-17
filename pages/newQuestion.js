@@ -58,7 +58,7 @@ export default class NewQuestion extends Component {
       tags
     } = this.state
 
-    db.doCreateQuestion(authUser.uid, authUser.email, title, question, tags, new Date().getTime())
+    db.doCreateQuestion(authUser.uid, authUser.email, title, question, tags, new Date().getTime(), 0)
       .then(() => {
         this.setState(() => ({...INITIAL_STATE}))
         Router.push('/')
