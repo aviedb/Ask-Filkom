@@ -77,15 +77,13 @@ export default class Answers extends Component {
 
     db.doCreateAnswer(this.props.url.query.id, authUser.uid, authUser.email, myAnswer, 0, new Date().getTime())
       .then(() => {
-
-      })
-
-    db.doUpdateAnswerCount(this.props.url.query.id, question.answers)
-      .then(() => {
-        this.setState({
-          myAnswer: '',
-          loadingSubmit: false
-        })
+        db.doUpdateAnswerCount(this.props.url.query.id, question.answers)
+          .then(() => {
+            this.setState({
+              myAnswer: '',
+              loadingSubmit: false
+            })
+          })
       })
   }
 
