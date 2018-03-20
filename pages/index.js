@@ -54,6 +54,8 @@ export default class Index extends Component {
           <Head>
             <link rel="stylesheet" href="../static/css/styles.css" />
             <link rel="shortcut icon" href="../static/img/simplified_logo_favicon.ico"/>
+            <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+              rel="stylesheet"/>
             <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
             <title>Home - ask-filkom</title>
           </Head>
@@ -65,7 +67,7 @@ export default class Index extends Component {
                 : <NotSignedInSidebar />
               }
             </div>
-            <div style={{ padding: "30px", paddingTop: "100px", flex: 1, marginLeft: "10px" }}>
+            <div className="home__middle">
               { this.state.loading &&
                 <Paper style={{width: "100%", marginTop: "10px", textAlign: "center", padding: "10px"}}>
                   <CircularProgress color="rgb(39, 94, 130)"/>

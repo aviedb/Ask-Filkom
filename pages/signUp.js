@@ -95,6 +95,7 @@ export default class Signup extends Component {
           <Head>
             <link rel="stylesheet" href="../static/css/styles.css" />
             <link rel="shortcut icon" href="../static/img/simplified_logo_favicon.ico"/>
+            <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
             <title>Sign Up - ask-filkom</title>
           </Head>
           <SimplifiedHeader />

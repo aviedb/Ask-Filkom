@@ -105,13 +105,15 @@ export default class Answers extends Component {
           <Head>
             <link rel="stylesheet" href="../static/css/styles.css" />
             <link rel="shortcut icon" href="../static/img/simplified_logo_favicon.ico"/>
+            <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+              rel="stylesheet"/>
             <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
             <title>Answers - ask-filkom</title>
           </Head>
           <Header user={authUser} />
           <div style={{ display:"flex" }}>
 
-            <div style={{ padding: "30px", paddingTop: "100px", flex: 1, marginLeft: "10px" }}>
+            <div className="answers_main">
               {this.props.url.query.id &&
                 <Paper style={{width: "100%", padding: "30px", marginTop: "10px"}}>
                   {loading &&

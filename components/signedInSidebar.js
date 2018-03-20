@@ -13,7 +13,7 @@ export default class SignedInSidebar extends Component {
 
     return (
       <div style={{position: "fixed", width: "250px", borderRight: "1px solid grey"}}>
-        <Paper style={{margin: "10px", padding: "15px"}}>
+        <Paper style={{marginTop: "10px", marginRight: "10px", marginBottom: "10px", padding: "15px"}}>
           <p>Welcome,</p>
           <p style={{fontWeight: "600"}}>{email}</p>
           <RaisedButton
