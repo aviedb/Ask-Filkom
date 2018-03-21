@@ -237,7 +237,7 @@ input:focus {
 
 .newQuestion_main {
   flex: 1;
-  padding: 30px;
+  margin-left: 40px;
   padding-top: 100px;
 }
 
@@ -309,5 +309,6 @@ input:focus {
   .newQuestion_main {
     padding: 20px;
     padding-top: 90px;
+    margin-left: 0;
   }
 }

@@ -151,7 +151,7 @@ export default class NewQuestion extends Component {
                       type="text"
                       underlineStyle={{ borderColor: "rgb(39, 107, 129)" }}
                       underlineFocusStyle={{ borderColor: "rgb(39, 94, 130)" }}
-                      style={{width: "100%", marginTop: "-12px"}}
+                      style={{width: "100%", marginTop: "-10px"}}
                       textFieldStyle={{width: "100%"}}
                       searchText={this.state.tagsValue}
                       onUpdateInput={this.onUpdateInput.bind(this)}
@@ -179,7 +179,7 @@ export default class NewQuestion extends Component {
                   </div>
                 </div>
                 {this.state.tags &&
-                  <Chip onRequestDelete={this.handleRequestDelete}>
+                  <Chip style={{marginTop: "10px"}} onRequestDelete={this.handleRequestDelete}>
                     {this.state.tags}
                   </Chip>
                 }
