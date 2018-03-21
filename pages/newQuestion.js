@@ -7,10 +7,13 @@ import Paper from 'material-ui/Paper'
 import TextField from 'material-ui/TextField'
 import RaisedButton from 'material-ui/RaisedButton'
 import CircularProgress from 'material-ui/CircularProgress'
+import AutoComplete from 'material-ui/AutoComplete'
+import Chip from 'material-ui/Chip'
 
 import { firebase, auth, db } from '../firebase'
 import Header from '../components/header'
 import Footer from '../components/footer'
+import TagsDataSource from '../utils/tagsDataSource'
 
 const muiTheme = getMuiTheme({ userAgent: false })
 
@@ -18,6 +21,7 @@ const INITIAL_STATE = {
   title: '',
   question: '',
   tags: '',
+  tagsValue: '',
   loadingSubmit: false
 }
 
@@ -66,6 +70,23 @@ export default class NewQuestion extends Component {
 
   }
 
+  onNewRequest(chosenRequest, index) {
+    this.setState({
+      tags: chosenRequest,
+      tagsValue: ''
+    })
+  }
+
+  onUpdateInput = (searchText) => {
+    this.setState({
+      tagsValue: searchText
+    })
+  }
+
+  handleRequestDelete = () => {
+    this.setState({tags: ""})
+  }
+
   render() {
     const {
       authUser,
@@ -80,7 +101,6 @@ export default class NewQuestion extends Component {
       title === '' ||
       question === '' ||
       tags === ''
-
 
     return (
       <MuiThemeProvider muiTheme={muiTheme}>
@@ -121,36 +141,48 @@ export default class NewQuestion extends Component {
                   onChange={event =>
                     this.setState(byPropKey('question', event.target.value))}
                 />
-                <div style={{textAlign: "left"}}>
-                  <TextField
-                    floatingLabelText="Tags"
-                    floatingLabelStyle={{ color: "rgb(39, 94, 130)" }}
-                    type="text"
-                    underlineStyle={{ borderColor: "rgb(39, 107, 129)" }}
-                    underlineFocusStyle={{ borderColor: "rgb(39, 94, 130)" }}
-                    style={{width: "50%"}}
-                    value={tags}
-                    onChange={event =>
-                      this.setState(byPropKey('tags', event.target.value))}
-                  />
+                <div style={{width: "100%", display: "flex", justifyContent: "space-between"}}>
+                  <div style={{textAlign: "left"}}>
+                    <AutoComplete
+                      floatingLabelText="Tags"
+                      filter={AutoComplete.fuzzyFilter}
+                      dataSource={TagsDataSource}
+                      floatingLabelStyle={{ color: "rgb(39, 94, 130)" }}
+                      type="text"
+                      underlineStyle={{ borderColor: "rgb(39, 107, 129)" }}
+                      underlineFocusStyle={{ borderColor: "rgb(39, 94, 130)" }}
+                      style={{width: "100%", marginTop: "-12px"}}
+                      textFieldStyle={{width: "100%"}}
+                      searchText={this.state.tagsValue}
+                      onUpdateInput={this.onUpdateInput.bind(this)}
+                      onNewRequest={this.onNewRequest.bind(this)}
+                    />
+                  </div>
+                  <div>
+                    { loadingSubmit &&
+                      <CircularProgress
+                        style={{ position: "absolute", marginTop: "15px", marginLeft: "27px", zIndex: "1"}}
+                        color="white"
+                        size={35}
+                      />
+                    }
+                    <RaisedButton
+                      label="Submit"
+                      backgroundColor="rgb(38, 95, 130)"
+                      labelColor="white"
+                      disabledBackgroundColor="#698EA5"
+                      disabledLabelColor="white"
+                      style={{marginTop: "15px"}}
+                      disabled={isInvalid || loadingSubmit}
+                      onClick={this.handleClick}
+                    />
+                  </div>
                 </div>
-                { loadingSubmit &&
-                  <CircularProgress
-                    style={{ position: "absolute", marginTop: "10px", marginLeft: "27px", zIndex: "1"}}
-                    color="white"
-                    size={35}
-                  />
+                {this.state.tags &&
+                  <Chip onRequestDelete={this.handleRequestDelete}>
+                    {this.state.tags}
+                  </Chip>
                 }
-                <RaisedButton
-                  label="Submit"
-                  backgroundColor="rgb(38, 95, 130)"
-                  labelColor="white"
-                  disabledBackgroundColor="#698EA5"
-                  disabledLabelColor="white"
-                  style={{marginTop: "10px"}}
-                  disabled={isInvalid || loadingSubmit}
-                  onClick={this.handleClick}
-                />
               </Paper>
             </div>
             <div className="home__sidebar" style={{padding: "30px", paddingTop: "100px"}}>
