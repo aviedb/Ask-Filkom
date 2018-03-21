@@ -129,13 +129,8 @@ export default class Answers extends Component {
                       <p style={{marginTop: "10px", marginBottom: "10px"}}>
                         {question.question}
                       </p>
-                      <div style={{display: "flex",marginTop: "20px", paddingBottom: "10px", borderBottom: "1px solid #265C7D"}}>
-                        <div style={{flex: "1"}}>
-                          <Chip>
-                            {question.tags}
-                          </Chip>
-                        </div>
-                        <div style={{flex: "1", color: "#265C7D",textAlign: "right"}}>
+                      <div style={{marginTop: "20px", paddingBottom: "10px", borderBottom: "1px solid #265C7D"}}>
+                        <div style={{color: "#265C7D",textAlign: "right"}}>
                           <p>
                             {question.senderEmail}
                           </p>
@@ -143,6 +138,13 @@ export default class Answers extends Component {
                             {moment(question.time).calendar()}
                           </p>
                         </div>
+                        <ul style={{display: "flex", flexWrap: "wrap"}}>
+                          {question.tags.map((tag) =>
+                            <Chip style={{marginTop: "10px", marginRight: "5px"}}>
+                              {tag}
+                            </Chip>
+                          )}
+                        </ul>
                       </div>
                       <h3 style={{margin: "30px"}}>
                         {`${question.answers} Answers`}

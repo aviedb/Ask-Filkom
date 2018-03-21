@@ -9,6 +9,7 @@ import RaisedButton from 'material-ui/RaisedButton'
 import CircularProgress from 'material-ui/CircularProgress'
 import AutoComplete from 'material-ui/AutoComplete'
 import Chip from 'material-ui/Chip'
+import Snackbar from 'material-ui/Snackbar'
 
 import { firebase, auth, db } from '../firebase'
 import Header from '../components/header'
@@ -20,9 +21,11 @@ const muiTheme = getMuiTheme({ userAgent: false })
 const INITIAL_STATE = {
   title: '',
   question: '',
-  tags: '',
+  tags: [],
   tagsValue: '',
-  loadingSubmit: false
+  loadingSubmit: false,
+  openSnackbar: false,
+  error: ''
 }
 
 const byPropKey = (propertyName, value) => ({
@@ -64,27 +67,70 @@ export default class NewQuestion extends Component {
 
     db.doCreateQuestion(authUser.uid, authUser.email, title, question, tags, new Date().getTime(), 0)
       .then(() => {
-        this.setState(() => ({...INITIAL_STATE}))
+        this.setState(() => ({ ...INITIAL_STATE }))
+        const { tags } = this.state
+        let tempTags = tags
+        tempTags.splice(0, 1)
+
+        this.setState({tags: tempTags})
         Router.push('/')
       })
 
   }
 
-  onNewRequest(chosenRequest, index) {
+  onNewRequest = (chosenRequest) => {
+    const { tags } = this.state
+    let tempTags = tags
+    let cek = false
+
+    for(var i=0; i<tempTags.length; i++) {
+      if(chosenRequest === tempTags[i]) {
+        cek = true
+      }
+    }
+
+    if (!cek) {
+      tempTags.push(chosenRequest)
+    } else {
+      this.setState({
+        openSnackbar: true,
+        error: 'Cannot add duplicate tags!'
+      })
+    }
+
+    if(tempTags.length > 3) {
+      this.setState({
+        openSnackbar: true,
+        error: 'You can only add 3 Tags!'
+      })
+    }
+
     this.setState({
-      tags: chosenRequest,
+      tags: tempTags.slice(0, 3),
       tagsValue: ''
     })
+
   }
 
-  onUpdateInput = (searchText) => {
+  onNewUpdateInput = (searchText) => {
     this.setState({
       tagsValue: searchText
     })
   }
 
-  handleRequestDelete = () => {
-    this.setState({tags: ""})
+  handleRequestDelete = (index) => {
+    const { tags } = this.state
+    let tempTags = tags
+    tempTags.splice(index, 1)
+
+    this.setState({tags: tempTags})
+  }
+
+  handleRequestClose = () => {
+    this.setState({
+      openSnackbar: false,
+      error: ''
+    })
   }
 
   render() {
@@ -93,14 +139,17 @@ export default class NewQuestion extends Component {
       title,
       question,
       tags,
+      tagsValue,
       time,
-      loadingSubmit
+      loadingSubmit,
+      openSnackbar,
+      error
     } = this.state
 
     const isInvalid =
       title === '' ||
       question === '' ||
-      tags === ''
+      tags.length === 0
 
     return (
       <MuiThemeProvider muiTheme={muiTheme}>
@@ -153,8 +202,8 @@ export default class NewQuestion extends Component {
                       underlineFocusStyle={{ borderColor: "rgb(39, 94, 130)" }}
                       style={{width: "100%", marginTop: "-10px"}}
                       textFieldStyle={{width: "100%"}}
-                      searchText={this.state.tagsValue}
-                      onUpdateInput={this.onUpdateInput.bind(this)}
+                      searchText={tagsValue}
+                      onUpdateInput={this.onNewUpdateInput.bind(this)}
                       onNewRequest={this.onNewRequest.bind(this)}
                     />
                   </div>
@@ -178,10 +227,14 @@ export default class NewQuestion extends Component {
                     />
                   </div>
                 </div>
-                {this.state.tags &&
-                  <Chip style={{marginTop: "10px"}} onRequestDelete={this.handleRequestDelete}>
-                    {this.state.tags}
-                  </Chip>
+                {tags.length>0 &&
+                  <ul style={{display: "flex", flexWrap: "wrap"}}>
+                    {tags.map((tag, index) =>(
+                      <Chip style={{marginTop: "10px", marginRight: "5px"}} onRequestDelete={() => this.handleRequestDelete(index)} key={index}>
+                        {tag}
+                      </Chip>
+                    ))}
+                  </ul>
                 }
               </Paper>
             </div>
@@ -191,6 +244,12 @@ export default class NewQuestion extends Component {
               </Paper>
             </div>
           </div>
+          <Snackbar
+            open={openSnackbar}
+            message={error}
+            autoHideDuration={4000}
+            onRequestClose={this.handleRequestClose}
+          />
           <Footer />
         </div>
       </MuiThemeProvider>

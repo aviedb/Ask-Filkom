@@ -17,11 +17,13 @@ export default class Questions extends Component {
             actAsExpander={true}
             showExpandableButton={true}
           >
-            <div>
-              <Chip style={{ margin: "4", marginTop: "10px" }}>
-                {this.props.tags}
-              </Chip>
-            </div>
+            <ul style={{display: "flex", flexWrap: "wrap"}}>
+              {this.props.tags.map((tag) =>
+                <Chip style={{ margin: "4", marginTop: "10px", marginRight: "5px" }}>
+                  {tag}
+                </Chip>
+              )}
+            </ul>
           </CardHeader>
           <CardText
             expandable={true}
