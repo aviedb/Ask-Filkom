@@ -130,11 +130,11 @@ export default class Answers extends Component {
                         {question.question}
                       </p>
                       <div style={{display: "flex",marginTop: "20px", paddingBottom: "10px", borderBottom: "1px solid #265C7D"}}>
-                        <p style={{flex: "1"}}>
+                        <div style={{flex: "1"}}>
                           <Chip>
                             {question.tags}
                           </Chip>
-                        </p>
+                        </div>
                         <div style={{flex: "1", color: "#265C7D",textAlign: "right"}}>
                           <p>
                             {question.senderEmail}

@@ -76,8 +76,8 @@ textarea:focus {
 /* Rules for sizing the icon. */
 .material-icons.md-18 { font-size: 18px; }
 .material-icons.md-24 { font-size: 24px; }
-.material-icons.md-36 { font-size: 36px; }
 .material-icons.md-30 { font-size: 30px; }
+.material-icons.md-36 { font-size: 36px; }
 .material-icons.md-48 { font-size: 48px; }
 
 /* Rules for using icons as black on a light background. */
@@ -235,6 +235,12 @@ input:focus {
   justify-content: space-between;
 }
 
+.newQuestion_main {
+  flex: 1;
+  padding: 30px;
+  padding-top: 100px;
+}
+
 .sideHeader {
   padding: 20px;
   width: 250px;
@@ -261,6 +267,8 @@ input:focus {
 
   .answers_main {
     margin-left: 0;
+    padding: 20px;
+    padding-top: 90px;
   }
 
   .home__sidebar {
@@ -296,5 +304,10 @@ input:focus {
     padding-left: 20px;
     padding-right: 20px;
     margin-left: 0;
+  }
+
+  .newQuestion_main {
+    padding: 20px;
+    padding-top: 90px;
   }
 }

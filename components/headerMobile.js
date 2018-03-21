@@ -35,11 +35,12 @@ export default class HederMobile extends Component {
 
   render() {
     const { user } = this.props
+
     return(
       <div className="header_mobile">
         <div className="sideHeader" style={{padding: "25px"}}>
           <a onClick={this.handleToggle}>
-            <i class="material-icons md-30" style={{color: "white"}}>menu</i>
+            <i className="material-icons md-30" style={{color: "white"}}>menu</i>
           </a>
           <Drawer
             docked={false}

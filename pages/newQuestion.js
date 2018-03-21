@@ -98,9 +98,9 @@ export default class NewQuestion extends Component {
             <div className="home__sidebar">
 
             </div>
-            <div style={{flex: "1", padding: "30px", paddingTop: "100px"}}>
+            <div className="newQuestion_main">
               <Paper style={{padding: "30px", marginTop: "10px", textAlign: "right"}}>
-                <p><h3>Ask a Question</h3></p>
+                <h3>Ask a Question</h3>
                 <TextField
                   floatingLabelText="Title"
                   floatingLabelStyle={{ color: "rgb(39, 94, 130)" }}

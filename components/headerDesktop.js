@@ -8,7 +8,7 @@ export default class Header extends Component {
   render() {
     return(
       <div className="header">
-        <div className="sideHeader" style={{padding: "30px"}}>
+        <div className="sideHeader" style={{padding: "30px", marginRight: "40px"}}>
           <Link href="/">
             <a>
               <img src="../static/img/LogoWhite.png" />
