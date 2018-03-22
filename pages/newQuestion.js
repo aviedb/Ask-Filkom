@@ -203,6 +203,7 @@ export default class NewQuestion extends Component {
                       style={{width: "100%", marginTop: "-10px"}}
                       textFieldStyle={{width: "100%"}}
                       searchText={tagsValue}
+                      maxSearchResults={3}
                       onUpdateInput={this.onNewUpdateInput.bind(this)}
                       onNewRequest={this.onNewRequest.bind(this)}
                     />

@@ -19,7 +19,7 @@ export default class Header extends Component {
           <div className="form-field">
             <input
               type="text"
-              style={{ background: "#FFFFFF", borderRadius: "2px" }}
+              style={{ background: "#FFFFFF", borderRadius: "5px", height: "35px" }}
               placeholder="Search..."
             >
             </input>

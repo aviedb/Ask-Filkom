@@ -130,7 +130,7 @@ textarea:focus {
 }
 
 .answers_main {
-  padding: 30px;
+  padding-left: 30px;
   padding-top: 100px;
   flex: 1;
   margin-left: 10px;
