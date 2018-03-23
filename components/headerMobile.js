@@ -11,8 +11,13 @@ export default class HederMobile extends Component {
     super(props)
 
     this.state = {
-      openDrawer: false
+      openDrawer: false,
+      searchKeyword: ''
     }
+  }
+
+  handleSubmit = () => {
+    Router.push(`/search?searchKeyword=${this.state.searchKeyword}`)
   }
 
   handleToggle = () => this.setState({openDrawer: !this.state.openDrawer})
@@ -36,7 +41,7 @@ export default class HederMobile extends Component {
 
     return(
       <div className="header_mobile">
-        <div className="sideHeader" style={{padding: "25px"}}>
+        <div className="sideHeader" style={{padding: "20px"}}>
           <a onClick={this.handleToggle}>
             <i className="material-icons md-30" style={{color: "#FFFFFF"}}>menu</i>
           </a>
@@ -97,15 +102,25 @@ export default class HederMobile extends Component {
           </Drawer>
         </div>
         <div style={{ flex: 1 }}>
-          <div className="form-field" style={{marginRight: "20px"}}>
+          <div className="form-field">
             <input
               type="text"
               style={{ background: "#FFFFFF", borderRadius: "5px", height: "35px" }}
               placeholder="Search..."
+              onChange={event => (
+                this.setState({searchKeyword: event.target.value})
+              )}
             >
             </input>
           </div>
         </div>
+        <button
+          style={{padding: "20px", color: "#FFFFFF", backgroundColor: "transparent"}}
+          type="submit"
+          onClick={this.handleSubmit}
+        >
+          <i className="material-icons">search</i>
+        </button>
       </div>
     )
   }
