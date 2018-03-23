@@ -18,7 +18,7 @@ export default class SignedInSidebar extends Component {
           <p style={{fontWeight: "600"}}>{email}</p>
           <RaisedButton
             backgroundColor="rgb(38, 95, 130)"
-            labelColor="white"
+            labelColor="#FFFFFF"
             label="Ask Question"
             style={{width: "100%", marginTop: "10px"}}
             onClick={this.handleClick}

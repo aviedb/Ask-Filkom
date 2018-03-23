@@ -126,16 +126,16 @@ export default class Login extends Component {
                   {this.state.loginLoading &&
                     <CircularProgress
                       style={{ position: "absolute", width: "258px", zIndex: "1", marginLeft: "112px" }}
-                      color="white"
+                      color="#FFFFFF"
                       size={35}
                     />
                   }
                   <RaisedButton
                     label="Sign In"
                     backgroundColor="rgb(38, 95, 130)"
-                    labelColor="white"
+                    labelColor="#FFFFFF"
                     disabledBackgroundColor="#698EA5"
-                    disabledLabelColor="white"
+                    disabledLabelColor="#FFFFFF"
                     disabled={isInvalid || this.state.loginLoading}
                     onClick={this.onSubmit}
                     type="submit"

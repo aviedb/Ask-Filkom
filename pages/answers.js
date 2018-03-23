@@ -139,8 +139,8 @@ export default class Answers extends Component {
                           </p>
                         </div>
                         <ul style={{display: "flex", flexWrap: "wrap"}}>
-                          {question.tags.map((tag) =>
-                            <Chip style={{marginTop: "10px", marginRight: "5px"}}>
+                          {question.tags.map((tag, index) =>
+                            <Chip key={index} style={{marginTop: "10px", marginRight: "5px"}}>
                               {tag}
                             </Chip>
                           )}
@@ -176,16 +176,16 @@ export default class Answers extends Component {
                         {loadingSubmit &&
                           <CircularProgress
                             style={{ position: "absolute", marginTop: "10px", marginLeft: "27px", zIndex: "1"}}
-                            color="white"
+                            color="#FFFFFF"
                             size={35}
                           />
                         }
                         <RaisedButton
                           label="Submit"
                           backgroundColor="rgb(38, 95, 130)"
-                          labelColor="white"
+                          labelColor="#FFFFFF"
                           disabledBackgroundColor="#698EA5"
-                          disabledLabelColor="white"
+                          disabledLabelColor="#FFFFFF"
                           disabled={isInvalid || loadingSubmit}
                           style={{marginTop: "10px"}}
                           onClick={this.handleClick}

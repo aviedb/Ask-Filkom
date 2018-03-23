@@ -13,7 +13,7 @@ export default class SignOutButton extends Component {
       <div style={{textAlign: "right"}}>
         <FlatButton
           label="Sign Out"
-          labelStyle={{color: "white"}}
+          labelStyle={{color: "#FFFFFF"}}
           hoverColor="#1F4C69"
           onClick={this.handleClick}
         />

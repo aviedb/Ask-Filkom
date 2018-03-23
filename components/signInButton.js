@@ -7,7 +7,7 @@ const signIn = () => (
       <Link href="/signIn">
         <FlatButton
           label="Sign In"
-          labelStyle={{color: "white"}}
+          labelStyle={{color: "#FFFFFF"}}
           hoverColor="#1F4C69"
         />
       </Link>

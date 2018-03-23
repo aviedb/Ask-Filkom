@@ -212,16 +212,16 @@ export default class NewQuestion extends Component {
                     { loadingSubmit &&
                       <CircularProgress
                         style={{ position: "absolute", marginTop: "15px", marginLeft: "27px", zIndex: "1"}}
-                        color="white"
+                        color="#FFFFFF"
                         size={35}
                       />
                     }
                     <RaisedButton
                       label="Submit"
                       backgroundColor="rgb(38, 95, 130)"
-                      labelColor="white"
+                      labelColor="#FFFFFF"
                       disabledBackgroundColor="#698EA5"
-                      disabledLabelColor="white"
+                      disabledLabelColor="#FFFFFF"
                       style={{marginTop: "15px"}}
                       disabled={isInvalid || loadingSubmit}
                       onClick={this.handleClick}

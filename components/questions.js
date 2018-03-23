@@ -1,11 +1,15 @@
 import React, { Component } from 'react'
-import Link from 'next/link'
+import Router from 'next/router'
 import moment from 'moment'
 import {Card, CardActions, CardHeader, CardText} from 'material-ui/Card'
 import RaisedButton from 'material-ui/RaisedButton'
 import Chip from 'material-ui/Chip'
 
 export default class Questions extends Component {
+  handleClick = (id) => {
+    Router.push(`/answers?id=${id}`)
+  }
+
   render() {
     return(
       <div>
@@ -18,8 +22,8 @@ export default class Questions extends Component {
             showExpandableButton={true}
           >
             <ul style={{display: "flex", flexWrap: "wrap"}}>
-              {this.props.tags.map((tag) =>
-                <Chip style={{ margin: "4", marginTop: "10px", marginRight: "5px" }}>
+              {this.props.tags.map((tag, index) =>
+                <Chip key={index} style={{ margin: "4", marginTop: "10px", marginRight: "5px" }}>
                   {tag}
                 </Chip>
               )}
@@ -27,17 +31,16 @@ export default class Questions extends Component {
           </CardHeader>
           <CardText
             expandable={true}
-            style={{ borderTop: "1px solid rgb(229, 234, 237)" }}
+            style={{ borderTop: "1px solid #E5EAED" }}
           >
             {this.props.question}
             <CardActions style={{padding:"0", paddingTop: "20px" }}>
-              <Link href={`/answers?id=${this.props.id}`}>
-                <RaisedButton
-                  backgroundColor="rgb(38, 95, 130)"
-                  labelColor="white"
-                  label={`${this.props.answers} Answers`}
-                />
-              </Link>
+              <RaisedButton
+                backgroundColor="#275E82"
+                labelColor="#FFFFFF"
+                label={`${this.props.answers} Answers`}
+                onClick={() => this.handleClick(this.props.id)}
+              />
             </CardActions>
           </CardText>
         </Card>

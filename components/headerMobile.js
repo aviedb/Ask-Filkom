@@ -5,8 +5,6 @@ import Drawer from 'material-ui/Drawer'
 import RaisedButton from 'material-ui/RaisedButton'
 
 import { auth } from '../firebase'
-import SignOutButton from './signOutButton'
-import SignInButton from './signInButton'
 
 export default class HederMobile extends Component {
   constructor(props) {
@@ -40,7 +38,7 @@ export default class HederMobile extends Component {
       <div className="header_mobile">
         <div className="sideHeader" style={{padding: "25px"}}>
           <a onClick={this.handleToggle}>
-            <i className="material-icons md-30" style={{color: "white"}}>menu</i>
+            <i className="material-icons md-30" style={{color: "#FFFFFF"}}>menu</i>
           </a>
           <Drawer
             docked={false}
