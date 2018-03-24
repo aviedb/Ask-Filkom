@@ -22,12 +22,32 @@ export default class Answer extends Component {
       this.setState({
         upvotedBy: this.props.upvotedBy
       })
+
+      if(this.props.user) {
+        for(var i=0; i<this.props.upvotedBy.length; i++) {
+          if(this.props.upvotedBy[i] === this.props.user.uid) {
+            this.setState({
+              upvotedByMe: true
+            })
+          }
+        }
+      }
     }
 
     if(this.props.downvotedBy) {
       this.setState({
         downvotedBy: this.props.downvotedBy
       })
+
+      if(this.props.user) {
+        for(var i=0; i<this.props.downvotedBy.length; i++) {
+          if(this.props.downvotedBy[i] === this.props.user.uid) {
+            this.setState({
+              downvotedByMe: true
+            })
+          }
+        }
+      }
     }
 
     if(this.props.verified) {
@@ -216,7 +236,7 @@ export default class Answer extends Component {
   }
 
   render() {
-    const { senderEmail, time, vote, answer, myQuestion } = this.props
+    const { senderEmail, time, vote, answer, myQuestion, user } = this.props
     const { upvotedByMe, downvotedByMe, verified } = this.state
 
     return (
@@ -253,7 +273,7 @@ export default class Answer extends Component {
               </div>
             }
           </div>
-          <p style={{flex: 1, margin: "auto", marginLeft: "20px", whiteSpace: "pre-line"}}>
+          <p style={{flex: 1, marginTop: "10px", marginLeft: "10px", whiteSpace: "pre-line"}}>
             {answer}
           </p>
         </div>

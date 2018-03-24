@@ -19,6 +19,8 @@ const muiTheme = getMuiTheme({ userAgent: false })
 const INITIAL_STATE = {
   myAnswer: '',
   qAnswer: [],
+  verAnswers: [],
+  othAnswers: [],
   loading: true,
   question: null,
   loadingSubmit: false,
@@ -53,6 +55,8 @@ export default class Answers extends Component {
 
   showQuestion(snapshot) {
     let qAnswers = []
+    let verAnswers = []
+    let othAnswers = []
     const { authUser } = this.state
 
     if(snapshot.qAnswer) {
@@ -60,9 +64,19 @@ export default class Answers extends Component {
         .map((item) => Object.assign({}, {key: item[0]}, item[1]))
     }
 
+    verAnswers = qAnswers.filter((qAnswer) =>
+      qAnswer.verified
+    )
+
+    othAnswers = qAnswers.filter((qAnswer) =>
+      !qAnswer.verified
+    )
+
     this.setState({
       question: snapshot,
       qAnswers,
+      verAnswers,
+      othAnswers,
       loading: false
     })
 
@@ -107,6 +121,8 @@ export default class Answers extends Component {
       question,
       loading,
       qAnswers,
+      verAnswers,
+      othAnswers,
       loadingSubmit,
       myQuestion
     } = this.state
@@ -170,7 +186,16 @@ export default class Answers extends Component {
                             {`${question.answers} Answers`}
                           </h3>
                           <ul style={{paddingBottom: "20px", borderBottom: "1px solid #265C7D"}}>
-                            {qAnswers.map((qAnswer) =>
+                            {verAnswers.map((qAnswer) =>
+                              <Answer
+                                user={authUser}
+                                id={qAnswer.key}
+                                qId={this.props.url.query.id}
+                                myQuestion={myQuestion}
+                                {...qAnswer}
+                              />
+                            )}
+                            {othAnswers.map((qAnswer) =>
                               <Answer
                                 user={authUser}
                                 id={qAnswer.key}

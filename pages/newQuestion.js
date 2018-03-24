@@ -65,7 +65,7 @@ export default class NewQuestion extends Component {
       tags
     } = this.state
 
-    db.doCreateQuestion(authUser.uid, authUser.email, title, question, tags, new Date().getTime(), 0)
+    db.doCreateQuestion(authUser.uid, authUser.email, title, question, tags, new Date().getTime())
       .then(() => {
         this.setState(() => ({ ...INITIAL_STATE }))
         const { tags } = this.state

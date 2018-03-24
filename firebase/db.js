@@ -1,6 +1,6 @@
 import { db } from './firebase'
 
-export const doCreateQuestion = (senderId, senderEmail, title, question, tags, time, answers) =>
+export const doCreateQuestion = (senderId, senderEmail, title, question, tags, time) =>
   db.ref('Question').push().set({
     senderId,
     senderEmail,
@@ -8,7 +8,8 @@ export const doCreateQuestion = (senderId, senderEmail, title, question, tags, t
     question,
     tags,
     time,
-    answers
+    answers: 0,
+    vote: 0
   })
 
 export const doGetQuestions = (callback) =>
@@ -29,6 +30,26 @@ export const doCreateAnswer = (id, senderId, senderEmail, answer, vote, time) =>
 export const doUpdateAnswerCount = (id, answers) =>
   db.ref(`Question/${id}`).update({
     answers: answers +1
+  })
+
+export const doUpvoteQuestionByUser = (qId, upvotedBy) =>
+  db.ref(`Question/${qId}`).update({
+    upvotedBy
+  })
+
+export const doDownvoteQuestionByUser = (qId, downvotedBy) =>
+  db.ref(`Question/${qId}`).update({
+    downvotedBy
+  })
+
+export const doUpvoteQuestion = (qId, vote) =>
+  db.ref(`Question/${qId}`).update({
+    vote: vote+1
+  })
+
+export const doDownvoteQuestion = (qId, vote) =>
+  db.ref(`Question/${qId}`).update({
+    vote: vote-1
   })
 
 export const doUpvoteAnswerByUser = (qId, aId, upvotedBy) =>
