@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import Head from 'next/head'
+import Router from 'next/router'
 import moment from 'moment'
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 import getMuiTheme from 'material-ui/styles/getMuiTheme'
@@ -87,6 +88,10 @@ export default class Answers extends Component {
       })
   }
 
+  handleClickChip = (tag) => {
+    Router.push(`/search?searchKeyword=${tag}`)
+  }
+
   render() {
     const {
       authUser,
@@ -140,7 +145,11 @@ export default class Answers extends Component {
                         </div>
                         <ul style={{display: "flex", flexWrap: "wrap"}}>
                           {question.tags.map((tag, index) =>
-                            <Chip key={index} style={{marginTop: "10px", marginRight: "5px"}}>
+                            <Chip
+                              key={index}
+                              style={{marginTop: "10px", marginRight: "5px"}}
+                              onClick={() => this.handleClickChip(tag)}
+                            >
                               {tag}
                             </Chip>
                           )}

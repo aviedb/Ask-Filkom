@@ -10,6 +10,10 @@ export default class Questions extends Component {
     Router.push(`/answers?id=${id}`)
   }
 
+  handleClickChip = (tag) => {
+    Router.push(`/search?searchKeyword=${tag}`)
+  }
+
   render() {
     return(
       <div>
@@ -23,7 +27,11 @@ export default class Questions extends Component {
           >
             <ul style={{display: "flex", flexWrap: "wrap"}}>
               {this.props.tags.map((tag, index) =>
-                <Chip key={index} style={{ margin: "4", marginTop: "10px", marginRight: "5px" }}>
+                <Chip
+                  key={index}
+                  style={{ margin: "4", marginTop: "10px", marginRight: "5px" }}
+                  onClick={() => this.handleClickChip(tag)}
+                >
                   {tag}
                 </Chip>
               )}
