@@ -15,7 +15,6 @@ import SimplifiedErrorMessage from '../utils/simplifiedErrorMessage'
 const muiTheme = getMuiTheme({ userAgent: false })
 
 const INITIAL_STATE = {
-  username: '',
   email: '',
   passwordOne: '',
   passwordTwo: '',
@@ -46,7 +45,6 @@ export default class Signup extends Component {
     this.setState(byPropKey('signupLoading', true))
 
     const {
-      username,
       email,
       passwordOne
     } = this.state
@@ -76,7 +74,6 @@ export default class Signup extends Component {
   render() {
 
     const {
-      username,
       email,
       passwordOne,
       passwordTwo,
@@ -86,8 +83,7 @@ export default class Signup extends Component {
     const isInvalid =
       passwordOne !== passwordTwo ||
       passwordOne === '' ||
-      email === '' ||
-      username === ''
+      email === ''
 
     return(
       <MuiThemeProvider muiTheme={muiTheme}>
@@ -105,18 +101,6 @@ export default class Signup extends Component {
                 <div className="form-field">
                   <h3>Create an account</h3>
                 </div>
-                <TextField
-                  autoFocus
-                  floatingLabelText="Username"
-                  floatingLabelStyle={{ color: "rgb(39, 94, 130)" }}
-                  type="text"
-                  style={{ width: "100%" }}
-                  underlineStyle={{ borderColor: "rgb(39, 107, 129)" }}
-                  underlineFocusStyle={{ borderColor: "rgb(39, 94, 130)" }}
-                  value={username}
-                  onChange={event =>
-                    this.setState(byPropKey('username', event.target.value))}
-                />
                 <TextField
                   floatingLabelText="Email"
                   floatingLabelStyle={{ color: "rgb(39, 94, 130)" }}

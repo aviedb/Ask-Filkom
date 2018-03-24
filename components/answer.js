@@ -12,7 +12,8 @@ export default class Answer extends Component {
       upvotedByMe: false,
       downvotedByMe: false,
       upvotedBy: [],
-      downvotedBy: []
+      downvotedBy: [],
+      verified: false
     }
   }
 
@@ -28,11 +29,17 @@ export default class Answer extends Component {
         downvotedBy: this.props.downvotedBy
       })
     }
+
+    if(this.props.verified) {
+      this.setState({
+        verified: this.props.verified
+      })
+    }
   }
 
   handleUpvote = () => {
     const { upvotedBy, downvotedBy } = this.state
-    const { user, qId, id, vote } = this.props
+    const { user, qId, id, vote, myQuestion } = this.props
     let cekUpvote, cekDownvote, iU, iD
 
     for(var i=0; i<upvotedBy.length; i++) {
@@ -61,6 +68,13 @@ export default class Answer extends Component {
                 upvotedBy: tempUpvotedBy,
                 upvotedByMe: false
               })
+
+              if(myQuestion) {
+                db.doToggleVerified(qId, id, false)
+                this.setState({
+                  verified: false
+                })
+              }
             })
         })
     } else if (cekDownvote) {
@@ -86,6 +100,13 @@ export default class Answer extends Component {
                 upvotedBy: tempUpvotedBy,
                 upvotedByMe: true
               })
+
+              if(myQuestion) {
+                db.doToggleVerified(qId, id, true)
+                this.setState({
+                  verified: true
+                })
+              }
             })
         })
     } else {
@@ -100,6 +121,13 @@ export default class Answer extends Component {
                 upvotedBy: tempUpvotedBy,
                 upvotedByMe: true
               })
+
+              if(myQuestion) {
+                db.doToggleVerified(qId, id, true)
+                this.setState({
+                  verified: true
+                })
+              }
             })
         })
     }
@@ -107,7 +135,7 @@ export default class Answer extends Component {
 
   handleDownvote = () => {
     const { upvotedBy, downvotedBy } = this.state
-    const { user, qId, id, vote } = this.props
+    const { user, qId, id, vote, myQuestion } = this.props
     let cekUpvote, cekDownvote, iU, iD
 
     for(var i=0; i<upvotedBy.length; i++) {
@@ -162,6 +190,13 @@ export default class Answer extends Component {
                 downvotedByMe: true
               })
             })
+
+          if(myQuestion) {
+            db.doToggleVerified(qId, id, false)
+            this.setState({
+              verified: false
+            })
+          }
         })
     } else {
       db.doDownvoteAnswer(qId, id, vote)
@@ -181,8 +216,8 @@ export default class Answer extends Component {
   }
 
   render() {
-    const { senderEmail, time, vote, answer } = this.props
-    const { upvotedByMe, downvotedByMe } = this.state
+    const { senderEmail, time, vote, answer, myQuestion } = this.props
+    const { upvotedByMe, downvotedByMe, verified } = this.state
 
     return (
       <Paper style={{width: "100%", padding: "20px", marginTop: "10px"}}>
@@ -208,11 +243,17 @@ export default class Answer extends Component {
             <a
               className="downvote"
               onClick={this.handleDownvote}
-              style={{color: (downvotedByMe? '#D32F2F':'#858C93')}}>
+              style={{color: (downvotedByMe? '#D32F2F':'#858C93')}}
+            >
               <i className="material-icons md-48">keyboard_arrow_down</i>
             </a>
+            {verified &&
+              <div style={{color: '#2E7D32', marginTop: "-10px"}}>
+                <i className="material-icons md-48">check</i>
+              </div>
+            }
           </div>
-          <p style={{flex: 1, margin: "auto", marginLeft: "20px"}}>
+          <p style={{flex: 1, margin: "auto", marginLeft: "20px", whiteSpace: "pre-line"}}>
             {answer}
           </p>
         </div>

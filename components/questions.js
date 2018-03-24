@@ -39,7 +39,7 @@ export default class Questions extends Component {
           </CardHeader>
           <CardText
             expandable={true}
-            style={{ borderTop: "1px solid #E5EAED" }}
+            style={{ borderTop: "1px solid #E5EAED", whiteSpace: "pre-line" }}
           >
             {this.props.question}
             <CardActions style={{padding:"0", paddingTop: "20px" }}>

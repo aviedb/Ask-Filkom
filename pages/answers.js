@@ -21,7 +21,8 @@ const INITIAL_STATE = {
   qAnswer: [],
   loading: true,
   question: null,
-  loadingSubmit: false
+  loadingSubmit: false,
+  myQuestion: false
 }
 
 const byPropKey = (propertyName, value) => ({
@@ -52,6 +53,7 @@ export default class Answers extends Component {
 
   showQuestion(snapshot) {
     let qAnswers = []
+    const { authUser } = this.state
 
     if(snapshot.qAnswer) {
       qAnswers = Object.entries(snapshot.qAnswer)
@@ -63,6 +65,12 @@ export default class Answers extends Component {
       qAnswers,
       loading: false
     })
+
+    if(authUser) {
+      this.setState({
+        myQuestion: (snapshot.senderId === authUser.uid)
+      })
+    }
   }
 
   handleClick = () => {
@@ -99,7 +107,8 @@ export default class Answers extends Component {
       question,
       loading,
       qAnswers,
-      loadingSubmit
+      loadingSubmit,
+      myQuestion
     } = this.state
 
     const isInvalid = myAnswer === ''
@@ -131,7 +140,7 @@ export default class Answers extends Component {
                       <p style={{fontWeight: "600"}}>
                         {question.title}
                       </p>
-                      <p style={{marginTop: "10px", marginBottom: "10px"}}>
+                      <p style={{marginTop: "10px", marginBottom: "10px", whiteSpace: "pre-line"}}>
                         {question.question}
                       </p>
                       <div style={{marginTop: "20px", paddingBottom: "10px", borderBottom: "1px solid #265C7D"}}>
@@ -166,6 +175,7 @@ export default class Answers extends Component {
                                 user={authUser}
                                 id={qAnswer.key}
                                 qId={this.props.url.query.id}
+                                myQuestion={myQuestion}
                                 {...qAnswer}
                               />
                             )}

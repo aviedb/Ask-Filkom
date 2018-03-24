@@ -50,3 +50,8 @@ export const doDownvoteAnswer = (qId, aId, vote) =>
   db.ref(`Question/${qId}/qAnswer/${aId}`).update({
     vote: vote-1
   })
+
+export const doToggleVerified = (qId, aId, verified) =>
+  db.ref(`Question/${qId}/qAnswer/${aId}`).update({
+    verified
+  })
