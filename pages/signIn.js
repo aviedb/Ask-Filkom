@@ -145,7 +145,7 @@ export default class Login extends Component {
                   <p style={{ textAlign: "center" }}>
                     don{"'"}t have an account?{' '}
                     <Link href="/signUp">
-                      <a>Signup here</a>
+                      <a style={{color: "#286A81"}}>Signup here</a>
                     </Link>
                   </p>
                 </div>

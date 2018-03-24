@@ -28,7 +28,7 @@ export default class Header extends Component {
             </a>
           </Link>
         </div>
-        <div style={{ flex: 1 }}>
+        <form onSubmit={() => Router.push(`/search?searchKeyword=${this.state.searchKeyword}`)} style={{ flex: 1 }}>
           <div className="form-field">
             <input
               type="text"
@@ -40,7 +40,7 @@ export default class Header extends Component {
             >
             </input>
           </div>
-        </div>
+        </form>
         <button
           style={{padding: "20px", color: "#FFFFFF", backgroundColor: "transparent"}}
           type="submit"

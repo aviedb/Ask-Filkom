@@ -146,17 +146,23 @@ export default class Answers extends Component {
                           )}
                         </ul>
                       </div>
-                      <h3 style={{margin: "30px"}}>
-                        {`${question.answers} Answers`}
-                      </h3>
-                      <ul style={{paddingBottom: "20px", borderBottom: "1px solid #265C7D"}}>
-                        {qAnswers.map((qAnswer) =>
-                          <Answer
-                            id={qAnswer.key}
-                            {...qAnswer}
-                          />
-                        )}
-                      </ul>
+                      {!loadingSubmit &&
+                        <div>
+                          <h3 style={{margin: "30px"}}>
+                            {`${question.answers} Answers`}
+                          </h3>
+                          <ul style={{paddingBottom: "20px", borderBottom: "1px solid #265C7D"}}>
+                            {qAnswers.map((qAnswer) =>
+                              <Answer
+                                user={authUser}
+                                id={qAnswer.key}
+                                qId={this.props.url.query.id}
+                                {...qAnswer}
+                              />
+                            )}
+                          </ul>
+                        </div>
+                      }
                     </div>
                   }
                   {authUser &&

@@ -30,3 +30,23 @@ export const doUpdateAnswerCount = (id, answers) =>
   db.ref(`Question/${id}`).update({
     answers: answers +1
   })
+
+export const doUpvoteAnswerByUser = (qId, aId, upvotedBy) =>
+  db.ref(`Question/${qId}/qAnswer/${aId}`).update({
+    upvotedBy
+  })
+
+export const doDownvoteAnswerByUser = (qId, aId, downvotedBy) =>
+  db.ref(`Question/${qId}/qAnswer/${aId}`).update({
+    downvotedBy
+  })
+
+export const doUpvoteAnswer = (qId, aId, vote) =>
+  db.ref(`Question/${qId}/qAnswer/${aId}`).update({
+    vote: vote+1
+  })
+
+export const doDownvoteAnswer = (qId, aId, vote) =>
+  db.ref(`Question/${qId}/qAnswer/${aId}`).update({
+    vote: vote-1
+  })

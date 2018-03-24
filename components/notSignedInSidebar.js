@@ -8,7 +8,7 @@ export default class NotSignedInSidebar extends Component {
         <Paper style={{margin: "10px", padding: "15px"}}>
           <p>Want to ask question?</p>
           <a href="/signIn">
-            <p style={{fontWeight: "600"}}>Sign In now</p>
+            <p style={{fontWeight: "600", color: "#286A81"}}>Sign In now</p>
           </a>
         </Paper>
       </div>
