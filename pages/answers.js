@@ -24,7 +24,12 @@ const INITIAL_STATE = {
   loading: true,
   question: null,
   loadingSubmit: false,
-  myQuestion: false
+  myQuestion: false,
+  upvotedByMe: false,
+  downvotedByMe: false,
+  upvotedBy: [],
+  downvotedBy: [],
+  id: ''
 }
 
 const byPropKey = (propertyName, value) => ({
@@ -59,6 +64,38 @@ export default class Answers extends Component {
     let othAnswers = []
     const { authUser } = this.state
 
+    if(snapshot.upvotedBy) {
+      this.setState({
+        upvotedBy: snapshot.upvotedBy
+      })
+
+      if(authUser) {
+        for(var i=0; i<snapshot.upvotedBy.length; i++) {
+          if(snapshot.upvotedBy[i] === authUser.uid) {
+            this.setState({
+              upvotedByMe: true
+            })
+          }
+        }
+      }
+    }
+
+    if(snapshot.downvotedBy) {
+      this.setState({
+        downvotedBy: snapshot.downvotedBy
+      })
+
+      if(authUser) {
+        for(var i=0; i<snapshot.downvotedBy.length; i++) {
+          if(snapshot.downvotedBy[i] === authUser.uid) {
+            this.setState({
+              downvotedByMe: true
+            })
+          }
+        }
+      }
+    }
+
     if(snapshot.qAnswer) {
       qAnswers = Object.entries(snapshot.qAnswer)
         .map((item) => Object.assign({}, {key: item[0]}, item[1]))
@@ -77,13 +114,164 @@ export default class Answers extends Component {
       qAnswers,
       verAnswers,
       othAnswers,
-      loading: false
+      loading: false,
+      id: this.props.url.query.id
     })
 
     if(authUser) {
       this.setState({
         myQuestion: (snapshot.senderId === authUser.uid)
       })
+    }
+  }
+
+  handleUpvote = () => {
+    const { upvotedBy, downvotedBy, authUser, id } = this.state
+    const { vote } = this.state.question
+    let cekUpvote, cekDownvote, iU, iD
+
+    for(var i=0; i<upvotedBy.length; i++) {
+      if (upvotedBy[i] === authUser.uid) {
+        cekUpvote = true
+        iU = i
+      }
+    }
+
+    for(var i=0; i<downvotedBy.length; i++) {
+      if(downvotedBy[i] === authUser.uid) {
+        cekDownvote = true
+        iD = i
+      }
+    }
+
+    if (cekUpvote) {
+      db.doDownvoteQuestion(id, vote)
+        .then(() => {
+          let tempUpvotedBy = upvotedBy
+          tempUpvotedBy.splice(iU, 1)
+
+          db.doUpvoteQuestionByUser(id, tempUpvotedBy)
+            .then(() => {
+              this.setState({
+                upvotedBy: tempUpvotedBy,
+                upvotedByMe: false
+              })
+            })
+        })
+    } else if (cekDownvote) {
+      db.doUpvoteQuestion(id, (vote+1))
+        .then(() => {
+          let tempDownvotedBy = downvotedBy
+          tempDownvotedBy.splice(iD, 1)
+
+          let tempUpvotedBy = upvotedBy
+          tempUpvotedBy.push(authUser.uid)
+
+          db.doDownvoteQuestionByUser(id, tempDownvotedBy)
+            .then(() => {
+              this.setState({
+                downvotedBy: tempDownvotedBy,
+                downvotedByMe: false
+              })
+            })
+
+          db.doUpvoteQuestionByUser(id, tempUpvotedBy)
+          .then(() => {
+            this.setState({
+              upvotedBy: tempUpvotedBy,
+              upvotedByMe: true
+            })
+          })
+        })
+    } else {
+      db.doUpvoteQuestion(id, vote)
+        .then(() => {
+          let tempUpvotedBy = upvotedBy
+          tempUpvotedBy.push(authUser.uid)
+
+          db.doUpvoteQuestionByUser(id, tempUpvotedBy)
+          .then(() => {
+            this.setState({
+              upvotedBy: tempUpvotedBy,
+              upvotedByMe: true
+            })
+          })
+        })
+    }
+  }
+
+  handleDownvote = () => {
+    const { upvotedBy, downvotedBy, authUser, id } = this.state
+    const { vote } = this.state.question
+    let cekUpvote, cekDownvote, iU, iD
+
+    for(var i=0; i<upvotedBy.length; i++) {
+      if (upvotedBy[i] === authUser.uid) {
+        cekUpvote = true
+        iU = i
+      }
+    }
+
+    for(var i=0; i<downvotedBy.length; i++) {
+      if(downvotedBy[i] === authUser.uid) {
+        cekDownvote = true
+        iD = i
+      }
+    }
+
+    if (cekDownvote) {
+      db.doUpvoteQuestion(id, vote)
+        .then(() => {
+          let tempDownvotedBy = downvotedBy
+          tempDownvotedBy.splice(iU, 1)
+
+          db.doDownvoteQuestionByUser(id, tempDownvotedBy)
+            .then(() => {
+              this.setState({
+                downvotedBy: tempDownvotedBy,
+                downvotedByMe: false
+              })
+            })
+        })
+    } else if (cekUpvote) {
+      db.doDownvoteQuestion(id, (vote-1))
+        .then(() => {
+          let tempUpvotedBy = upvotedBy
+          tempUpvotedBy.splice(iU, 1)
+
+          let tempDownvotedBy = downvotedBy
+          tempDownvotedBy.push(authUser.uid)
+
+          db.doUpvoteQuestionByUser(id, tempUpvotedBy)
+            .then(() => {
+              this.setState({
+                upvotedBy: tempUpvotedBy,
+                upvotedByMe: false
+              })
+            })
+
+          db.doDownvoteQuestionByUser(id, tempDownvotedBy)
+            .then(() => {
+              this.setState({
+                downvotedBy: tempDownvotedBy,
+                downvotedByMe: true
+              })
+            })
+        })
+    } else {
+      db.doDownvoteQuestion(id, vote)
+        .then(() => {
+          let tempDownvotedBy = downvotedBy
+          tempDownvotedBy.push(authUser.uid)
+
+          db.doDownvoteQuestionByUser(id, tempDownvotedBy)
+            .then(() => {
+              this.setState({
+                downvotedBy: tempDownvotedBy,
+                downvotedByMe: true
+              })
+            })
+        })
     }
   }
 
@@ -124,7 +312,9 @@ export default class Answers extends Component {
       verAnswers,
       othAnswers,
       loadingSubmit,
-      myQuestion
+      myQuestion,
+      upvotedByMe,
+      downvotedByMe
     } = this.state
 
     const isInvalid = myAnswer === ''
@@ -138,7 +328,9 @@ export default class Answers extends Component {
             <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
               rel="stylesheet"/>
             <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-            <title>Answers - ask-filkom</title>
+            {!loading &&
+              <title>{question.title} - ask-filkom</title>
+            }
           </Head>
           <Header user={authUser} />
           <div style={{ display:"flex" }}>
@@ -156,9 +348,34 @@ export default class Answers extends Component {
                       <p style={{fontWeight: "600"}}>
                         {question.title}
                       </p>
-                      <p style={{marginTop: "10px", marginBottom: "10px", whiteSpace: "pre-line"}}>
-                        {question.question}
-                      </p>
+                      <div style={{display: "flex"}}>
+                        <div style={{marginLeft: "-10px"}}>
+                          <a
+                            className="upvote"
+                            onClick={this.handleUpvote}
+                            style={{color: (upvotedByMe? '#2E7D32':'#858C93')}}
+                          >
+                            <i className="material-icons md-48">keyboard_arrow_up</i>
+                          </a>
+                          <h3
+                            style={{
+                              color: (upvotedByMe? '#2E7D32':(downvotedByMe?'#D32F2F':'#858C93'))
+                            }}
+                          >
+                            {question.vote}
+                          </h3>
+                          <a
+                            className="downvote"
+                            onClick={this.handleDownvote}
+                            style={{color: (downvotedByMe? '#D32F2F':'#858C93')}}
+                          >
+                            <i className="material-icons md-48">keyboard_arrow_down</i>
+                          </a>
+                        </div>
+                        <p style={{flex: 1, marginTop: "10px", marginBottom: "10px", marginLeft: "10px", whiteSpace: "pre-line"}}>
+                          {question.question}
+                        </p>
+                      </div>
                       <div style={{marginTop: "20px", paddingBottom: "10px", borderBottom: "1px solid #265C7D"}}>
                         <div style={{color: "#265C7D",textAlign: "right"}}>
                           <p>
